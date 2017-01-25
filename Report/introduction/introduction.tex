@@ -1,0 +1,43 @@
+\chapter{Introduction}
+\label{sec:introduction}
+This chapter will introduce the subject of mixed criticality embedded systems and the project EMC2 to the reader.
+
+\section{Background}
+There is a global trend to make vehicles and machines more autonomous to reduce human error and workload. Many of these vehicles are safety-critical systems where a failure can cause great damage to both humans and the environment. When the implementation is a safety-critical system it is important to be certain of the risks that are present and how to cope with them. The $EMC^2$ project (https://www.artemis-emc2.eu/) is an initiative to drive the development of "Embedded Multi-Core systems for Mixed Criticality applications in dynamic and changeable real-time environments". One focus of the project is on automotive applications for example: "Advanced Driver Assistance Systems" (ADAS). ADAS are systems designed to help the driver and to increase the safety when driving. One system is the road and lane detection system to help keep the car on the road and within it's lanes. What differs mixed criticality systems from regular systems is that two systems or tasks with different criticality are run on the same processor. One example could be to run the road detection system and the radio system on the same ECU. 
+
+
+\section{Problem statement}
+We want to implement a road and lane detection system on a small RC-type car to follow a predefined path autonomously. 
+
+Today there is a lot of research on ADAS where everything from "Lane Departure Warning (LDW)" to "Full autonomous driving" is investigated. 
+
+However there is not much research about the possibility of using an ADAS on a mixed criticality system. This thesis will investigate different techniques for road and lane detection and how they can be implemented on the RTOS of a Mixed Criticality System.
+
+
+\subsection{Research questions}
+What are the existing lane keeping algorithm and how do they compare to each other (some criteria, you can refine later).\\
+
+How does mixed criticality affect the choice of method for line following?\\
+
+Which lane keeping algorithm can be selected in mixed-criticality system?\\
+
+Can the system be evaluated using the program Extended Farkle?
+
+\section{Purpose}
+In order to reduce the amount of ECUs in mechatronic systems, it must be verified that non safety critical applications do not interfere with safety critical applications.
+
+\section{Goals}
+In this project there are both team goals and individual goals that do not necessarily align with each other.
+
+\subsection{Team goal}
+Team demonstrator
+
+\subsection{Individual goal}
+The individual goal is to investigate different techniques for road and lane detection and how they can be implemented on the RTOS of a Mixed Criticality System.
+
+\subsection{Scope}
+The thesis is produced at Alten.
+Constrained to the Xilinx Zynq-7000 \footnote{https://www.xilinx.com/products/silicon-devices/soc/zynq-7000.html}.
+
+\subsection{Method}
+Implement safety-critical controller on the embedded system. Measure performance of controller. Missed deadlines? CPU usage? Compare with no non safety-critical load.
