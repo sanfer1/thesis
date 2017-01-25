@@ -4,7 +4,11 @@ This chapter will introduce the subject of road and lane detection, and mixed ci
 
 
 \section{Background}
-There is a global trend to make vehicles and machines more autonomous to reduce human error and workload. Many of these vehicles are safety-critical systems where a failure can cause great damage to both humans and the environment. When the implementation is a safety-critical system it is important to be certain of the risks that are present and how to cope with them. The $EMC^2$ project (https://www.artemis-emc2.eu/) is an initiative to drive the development of "Embedded Multi-Core systems for Mixed Criticality applications in dynamic and changeable real-time environments". One way to utilize mixed criticality can be to use virtualization, where there is a virtual operating system on a RTOS where tasks of lower criticality can be executed.
+There is a global trend to make vehicles and machines more autonomous to reduce human error and workload. Many of these vehicles are safety-critical systems where a failure can cause great damage to both humans and the environment. When the implementation is a safety-critical system it is important to be certain of the risks that are present and how to cope with them. The $EMC^2$ project (https://www.artemis-emc2.eu/) is an initiative to drive the development of "Embedded Multi-Core systems for Mixed Criticality applications in dynamic and changeable real-time environments". 
+
+
+
+%One way to utilize mixed criticality can be to use virtualization, where there is a virtual operating system on a RTOS where tasks of lower criticality can be executed.
 
 One focus of the $EMC^2$ project is on automotive applications for example: "Advanced Driver Assistance Systems" (ADAS). ADAS are systems designed to help the driver and to increase the safety when driving. One of these systems is the road and lane detection system to help keep the car on the road and within it's lanes. What differs mixed criticality systems from regular systems is that two systems or tasks with different criticality are run on the same processor. One example could be to run the road detection system and the radio system on the same ECU. 
 
