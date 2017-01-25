@@ -1,9 +1,12 @@
 \chapter{Introduction}
 \label{sec:introduction}
-This chapter will introduce the subject of mixed criticality embedded systems and the project EMC2 to the reader.
+This chapter will introduce the subject of road and lane detection, and mixed cirticality to the reader. The problems that exist in the field and what the purpose of this degree project is.
+
 
 \section{Background}
-There is a global trend to make vehicles and machines more autonomous to reduce human error and workload. Many of these vehicles are safety-critical systems where a failure can cause great damage to both humans and the environment. When the implementation is a safety-critical system it is important to be certain of the risks that are present and how to cope with them. The $EMC^2$ project (https://www.artemis-emc2.eu/) is an initiative to drive the development of "Embedded Multi-Core systems for Mixed Criticality applications in dynamic and changeable real-time environments". One focus of the project is on automotive applications for example: "Advanced Driver Assistance Systems" (ADAS). ADAS are systems designed to help the driver and to increase the safety when driving. One system is the road and lane detection system to help keep the car on the road and within it's lanes. What differs mixed criticality systems from regular systems is that two systems or tasks with different criticality are run on the same processor. One example could be to run the road detection system and the radio system on the same ECU. 
+There is a global trend to make vehicles and machines more autonomous to reduce human error and workload. Many of these vehicles are safety-critical systems where a failure can cause great damage to both humans and the environment. When the implementation is a safety-critical system it is important to be certain of the risks that are present and how to cope with them. The $EMC^2$ project (https://www.artemis-emc2.eu/) is an initiative to drive the development of "Embedded Multi-Core systems for Mixed Criticality applications in dynamic and changeable real-time environments". One way to utilize mixed criticality can be to use virtualization, where there is a virtual operating system on a RTOS where tasks of lower criticality can be executed.
+
+One focus of the $EMC^2$ project is on automotive applications for example: "Advanced Driver Assistance Systems" (ADAS). ADAS are systems designed to help the driver and to increase the safety when driving. One of these systems is the road and lane detection system to help keep the car on the road and within it's lanes. What differs mixed criticality systems from regular systems is that two systems or tasks with different criticality are run on the same processor. One example could be to run the road detection system and the radio system on the same ECU. 
 
 
 \section{Problem statement}
@@ -15,11 +18,11 @@ However there is not much research about the possibility of using an ADAS on a m
 
 
 \subsection{Research questions}
-What are the existing lane keeping algorithm and how do they compare to each other (some criteria, you can refine later).\\
+What are the existing road and lane detection systems and how do they compare to each other?\\
 
-How does mixed criticality affect the choice of method for line following?\\
+How does mixed criticality affect the choice of method for road and lane following?\\
 
-Which lane keeping algorithm can be selected in mixed-criticality system?\\
+Which road and lane detection system can be selected in a mixed-criticality system?\\
 
 Can the system be evaluated using the program Extended Farkle?
 
@@ -30,10 +33,10 @@ In order to reduce the amount of ECUs in mechatronic systems, it must be verifie
 In this project there are both team goals and individual goals that do not necessarily align with each other.
 
 \subsection{Team goal}
-Team demonstrator
+The team goal is to develop a demonstrator which consists of two small RC-cars that are supposed to group into a vehicle convoy where the first car follows a predefined path marked on the ground and the other car follows the first.
 
 \subsection{Individual goal}
-The individual goal is to investigate different techniques for road and lane detection and how they can be implemented on the RTOS of a Mixed Criticality System.
+The individual goal and expected outcome from this thesis is a study of existing road and lane detecting systems. Then comparing them to determine which is suitable for implementation in the safety critical system that the group is developing. The last part of the project is to implement the lane keeping algorithm on the RTOS of the mixed criticality system to demonstrate the functionality.
 
 \subsection{Scope}
 The thesis is produced at Alten.
