@@ -2,12 +2,23 @@
 In this chapter I will write about the literature study that has been carried out. Things to invlude in this chapter is: Lane detection in general. Image processing- hough transform etc.. MCS. Misra-c? Information about the board  (EMC2 and zedboard)
 
 \section{Lane keeping}
-For a human driving may seem like a simple process where two basic tasks are involved. The first is to keep the vehicle and the road and the second to avoid collisions. But i reality driving is not so trivival, a driver need to continoulsly analyze the road scene and choose and execute the appropriate maneuvers to deal with the current situation. To help the drivers do these tasks Driving Assistance Systems (DAS) have been developed. These systems can help the driver to percieve the blind area in the road for an example. An extencion is the Advanced Driving Assistance System (ADAS) Which can perform basic tasks like: Lane following, Lane keeping assistance, Lane departure warning, lateral control, intelligent cruise control, collision warning and ultimately autonomous driving. 
+For a human driving may seem like a simple process where two basic tasks are involved. The first is to keep the vehicle and the road and the second to avoid collisions. But in reality driving is not so trivival, a driver need to continoulsly analyze the road scene and choose and execute the appropriate maneuvers to deal with the current situation. To help the drivers do these tasks Driving Assistance Systems (DAS) have been developed. These systems can help the driver to percieve the blind area in the road for an example. An extension is the Advanced Driving Assistance System (ADAS) Which can perform basic tasks like: Lane following, Lane keeping assistance, Lane departure warning, lateral control, intelligent cruise control, collision warning and ultimately autonomous driving.\\
 
-The main bottleneck in the development of ADAS systems is the perception problem, which has two elements: road and lane perception, and obstacle detection. I this section i will investigate the first element and study what the current state of the art is. 
+The main bottleneck in the development of ADAS systems is the perception problem, which has two elements: road and lane perception, and obstacle detection. I this section i will investigate the first element and study what the current state of the art is.\\
 
-When humans drive we continously look at the road boundries, the lane markings and the road texture among other things. Self driving vehicles that are supposed to share the road with human drivers will therefore most likely have to rely on the same perceptual cues as humans. Today there are several different sensing modalities used for lane detection. Some examples are monocular vision, stereo vision, LIDAR, IMU data, GPS.
+When humans drive we continously look at the road boundries, the lane markings and the road texture among other things. Self driving vehicles that are supposed to share the road with human drivers will therefore most likely have to rely on the same perceptual cues as humans. Today there are several different sensing modalities used for lane detection. Some examples are monocular vision, stereo vision, LIDAR, IMU data, GPS.\\
 
-Vison is the most prominent area research area due to the fact that road signs/markings are made for human vision. LIDAR ans GPS are important compliments for reaching full autonomous driving.
+Vison is the most prominent area research area due to the fact that road signs/markings are made for human vision. LIDAR ans GPS are important compliments for reaching full autonomous driving.\\
 
-In its basic setting the lane detection problem seems like a simple one. The only thing needed is to detect a host lane and only for a shor distance ahead. A simple Hough transform-based algorithm solves the problem in 90\% of highway cases \citep{•}. But the impression that the problem is easy is misleading and building a useful system requires a huge R&D effort. One of the reasons is the high reliability demands. In order to be useful the system needs to reach very low error rates. The exact amount of false alarms is still a subject of research \citep{•}. At 15 frames per second, 1 false alarm per hour means only one error in 54,000 frames. 
+In its basic setting the lane detection problem seems like a simple one. The only thing needed is to detect a host lane and only for a shor distance ahead. A simple Hough transform-based algorithm solves the problem in 90\% of highway cases %\citep{•}. 
+But the impression that the problem is easy is misleading and building a useful system requires a huge R\& D effort. One of the reasons is the high reliability demands. In order to be useful the system needs to reach very low error rates. The exact amount of false alarms is still a subject of research %\citep{•}.
+At 15 frames per second, 1 false alarm per hour means only one error in 54,000 frames. \\
+
+
+One factor that makes ADAS hard to implement on large scale is the large amount of different conditions that has to be taken care of. The main sources for condition diversity are:\\
+-Lane and road appearce\\
+-image clarity issues\\
+-poor visibility conditions\\
+
+\section{modalities}
+
