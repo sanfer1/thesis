@@ -35,8 +35,11 @@ Light detection and ranging (LIDAR) is a modalitiy that have been used to a larg
 
 LIDAR sensors can perform well in certain situations for example in rural areas to detect road boundries (Lakshmanan) but are not well suited for multilane roads without vision data. As the LIDAR only measures 3D structures it not able to detect road markings, although some research have been done on intensity measurement with LIDAR (Källa Bar Hillel) which would make it possible to detect line markings. One huge drawback with this modality is that the sensors are still very expensive and thus not yet an alternative for implementation in regular passenger vehicles.
 \subsection{Stereo imaging}
-Stereo imaging is the use of two cameras instead of one camera in order to obtain 3D information about the surronding. It is a step in between the monocular vision and the LIDAR as it is much cheaper to implement than LIDAR but generally performs less good in terms of accuracy and reliability.  Also the stereo imaging system generally requires greater processing power 
-          
+Stereo imaging is the use of two cameras instead of one camera in order to obtain 3D information about the surronding. It is a step in between the monocular vision and the LIDAR as it is much cheaper to implement than LIDAR but generally performs less good in terms of accuracy and reliability.  Also the stereo imaging system generally requires greater processing power and is more prone to errors compared to LIDAR. 
+
+
+\subsection{GIS, GPS, IMU}
+
 \section{Use case}
 My degree project will be about the perception problem for autonomous vehicles. The group is developing a vehicle platoon where one vehicle drives autonomously around a predefined track and a second vehicle is following the first. Use case number 3 in the safecop project description "Vehicle controll loss warning" ties well with my own project. In the safecop project description there is mentioned "The US National Highway Traffic Safety Administration (NHTSA) has estimated that “V2V safety
 applications have the potential to address approximately 80\% of crashes for unimpaired drivers”." The idea is to implement obstacle detection on the road and send out a warning to other vehicles in the platoon or close surrounding.
@@ -48,3 +51,11 @@ With this use case in mind five requirements have been developed:\\
 4. \\
 5\\
 
+\section{Lateral control}
+Pure pursuit
+\section{convolutional neural networks}
+
+
+\section{Flowchart of image processing}
+\section{algorithms}
+RANSAC algorithm 
