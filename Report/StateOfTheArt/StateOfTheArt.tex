@@ -51,11 +51,24 @@ With this use case in mind five requirements have been developed:\\
 4. \\
 5\\
 
-\section{Lateral control}
+\section{Lateral Control}
 Pure pursuit
-\section{convolutional neural networks}
+\section{Convolutional Neural Networks}
 
 
 \section{Flowchart of image processing}
-\section{algorithms}
-RANSAC algorithm 
+\subsection{Image acquisition}
+The image acquisition typically come from a camera that is mounted in the center of the vehicle. 
+\subsection{Preprocess}
+The preprocess is a step where the image is prepared for the next steps in terms of image resolution, where a lower image resolution is often prefered due to the high computational load that high resolution images bring. Everything that is not part of the Region of interest (ROI) is often removed. This typically means removing the region above the horizon. Often gray-scale images are prefered over color images due to reduced data load (YENIKAYA). Removal of unwanted disturbances such as shadows are often done in the preprocess. 
+\subsection{Feature Extraction}
+There are several features that can be use for road and lane detection. Color, Texture, Edges
+
+For structured roads with clear line markings the edges are the most common feature used for lane detection. An edge is defined as the gradient of the intensity function (YENIKAYA). The output of an edge based method are candidates for lane boundaries, since edge based methods are able to find where the image brightness changes sharply. There are some well known edge detection methods, but one method called Canny edge detector stands out and is still, 30 years after it was first developed, considered a state-of-the-art edge detector, some even mean that it is an optimal edge detector algorithm \cite{bhadauria2013comparison}
+
+\subsection{Model Fitting}
+\subsection{Time Integration}
+\subsection{video input}
+\section{Algorithms}
+RANSAC algorithm
+Least squares method
