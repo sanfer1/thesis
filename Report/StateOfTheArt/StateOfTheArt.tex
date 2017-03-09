@@ -64,11 +64,14 @@ The preprocess is a step where the image is prepared for the next steps in terms
 \subsection{Feature Extraction}
 There are several features that can be use for road and lane detection. Color, Texture, Edges
 
-For structured roads with clear line markings the edges are the most common feature used for lane detection. An edge is defined as the gradient of the intensity function (YENIKAYA). The output of an edge based method are candidates for lane boundaries, since edge based methods are able to find where the image brightness changes sharply. There are some well known edge detection methods, but one method called Canny edge detector stands out and is still, 30 years after it was first developed, considered a state-of-the-art edge detector, some even mean that it is an optimal edge detector algorithm \cite{bhadauria2013comparison}
+For structured roads with clear line markings the edges are the most common feature used for lane detection. An edge is defined as the gradient of the intensity function (YENIKAYA). The output of an edge based method are candidates for lane boundaries, since edge based methods are able to find where the image brightness changes sharply. There are some well known edge detection methods (Prewitt,Roberts Sobel, Canny), but one method called Canny edge detector stands out and is still, 30 years after it was first developed, considered a state-of-the-art edge detector, some even mean that it is an optimal edge detector algorithm \cite{bhadauria2013comparison}. The next step is usually to do binarization and thinning of the output from the edge detector in order to reduce the thickness of all lines to only one pixel. Hough transform is then applied on the image in order to determine if there is an edge at one certain pixel or not. 
 
 \subsection{Model Fitting}
+
 \subsection{Time Integration}
+
 \subsection{video input}
+
 \section{Algorithms}
 RANSAC algorithm
 Least squares method
