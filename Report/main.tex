@@ -25,7 +25,10 @@
 %\usepackage[inline]{enumitem}
 \usepackage{paralist}
 
-\usepackage[numbers]{natbib}
+%\usepackage[numbers]{natbib}
+\bibliographystyle{plain}
+\usepackage{cite}
+
 
 \setlength\parindent{0pt}
 
@@ -45,24 +48,23 @@ Sanel Ferhatovic\\
 \pagenumbering{roman}
 \maketitle
 \selectlanguage{english}
-\include{./abstract/abstract}
-\include{./sammanfattning/sammanfattning}
-\include{./preface/preface}
+\include{abstract}
+\include{sammanfattning}
+\include{preface}
 \tableofcontents
 \listoffigures
 \listoftables
 %\listoflistings
-\include{./abbreviations/abbreviations}
+\include{abbreviations}
 \pagenumbering{arabic}
-\include{./introduction/introduction}
-\include{./StateOfTheArt/StateOfTheArt}
-\include{./implementation/implementation}
-\include{./results/results}
-\include{./discussion/discussion}
-\include{./futurework/futurework}
-\bibliographystyle{plain}
+\include{introduction}
+\include{StateOfTheArt}
+\include{implementation}
+\include{results}
+\include{discussion}
+\include{futurework}
 \bibliography{bib}
 \appendix
-\include{./appendix/appendix}
+\include{appendix}
 
 \end{document}
