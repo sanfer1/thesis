@@ -1,6 +1,26 @@
 \chapter{State of the Art}
 In this chapter I will write about the literature study that has been carried out. Things to include in this chapter is: Lane detection in general, Image processing- hough transform etc.. MCS. Misra-c? Information about the board  (EMC2 and zedboard)
 
+\section{SAE Level}
+When talking about Advanced Driver Assistance Systems (ADAS) and autonomous vehicles it is important to define what it actually means. SAE International is a professional association and standards developing organization for transport industries. They have developed a new standard for autonomous driving called  "J3016: Taxonomy and Definitions for Terms Related to On-Road Motor Vehicle Automated Driving Systems,”. This standard defines six levels of driving automation, from no automation to full automation. \cite{SAE} \cite{SAEweb}. 
+
+\begin{table}[H]
+\centering
+\caption{SAE Levels}
+\label{SAE Levels}
+\begin{tabular}{|l|l|l|ll}
+\cline{1-3}
+ \textbf{Level} & \textbf{Name} & \textbf{Description}	\\
+\cline{1-3}\hline
+ 0	& No Automation & The human does all the work\\ \cline{1-3}\hline
+ 1  & Driver Assistance & \pbox{7cm}{The vehicle help out by doing a single task. One example is a cruise control where the car holds a reference speed}\\ \cline{1-3}\hline
+ 2  & Partial Automation & \pbox{7cm}{The vehicle can help the driver with certain things like maintaining speed, keeping within the lanes, avoiding collisions with other vehicles. Ultimately the driver is responsible and need to be prepared for taking over the control}\\ \cline{1-3}
+ 3  & Conditional Automation & \pbox{7cm}{The first level that is considered as an automated driving system. In this level the vehicle is able to make decisions as overtaking other vehicles and navigating. In this level humans are only the fall-back option if something fails the vehicle will request the human to intervene }\\ \cline{1-3}
+ 4	& High Automation & \pbox{7cm}{In level 4, the vehicle is able to operate entirely by it self for the first time, there does not need to be any human behind the wheel as a fall-back. What differs this level from full automation is that it is on a geographically limited area like a center of a town, company area or college campus. }\\ \cline{1-3}
+ 5	& Full Automation & \pbox{7cm}{Level 5 is where full automated driving is reached. The vehicle can handle all operating modes. There is no steering wheel nor pedals. Just let the vehicle know where you want to go.}\\ \cline{1-3}
+\end{tabular}
+\end{table}
+
 \section{Lane keeping}
 For a human driving may seem like a simple process where two basic tasks are involved. The first is to keep the vehicle and the road and the second to avoid collisions. But in reality driving is not so trivial, a driver need to continuously analyze the road scene and choose and execute the appropriate maneuvers to deal with the current situation. To help the drivers do these tasks Driving Assistance Systems (DAS) have been developed. These systems can help the driver to perceive the blind area in the road for an example. An extension is the Advanced Driving Assistance System (ADAS) Which can perform basic tasks like: Lane following, Lane keeping assistance, Lane departure warning, lateral control, intelligent cruise control, collision warning and ultimately autonomous driving.\\
 
@@ -28,7 +48,7 @@ One factor that makes ADAS hard to implement on large scale is the large amount 
 In this section the modalities used for road and lane detection will be described more in detail.
 
 \subsection{Monocular vision}
-The monocular vision system is frequently used for road and lane detection. It is more simply put one camera mounted on the vehicle. The required resolution can be derived from FORMEL \cite{BarHillel2014}.\\
+The monocular vision system is frequently used for road and lane detection. It is more simply put one camera mounted on the vehicle. The required resolution can be derived from $N_p = \frac{Cd}{w}$, where $N_p$ is the number of horizontal pixels, $C$ is the camera field of view width in radians. $w$ is the lane mark width in meter \cite{BarHillel2014}.\\
 When humans drive we continuously look at the road boundaries, the lane markings and the road texture among other things. These road boundaries are designed so that they should be visible for human drivers in all driving condition. Self driving vehicles that are supposed to share the road with human drivers will therefore most likely have to rely on the same perceptual cues as humans.
 
 \subsection{LIDAR}
@@ -62,9 +82,9 @@ Pure pursuit
 \subsection{Road model}
 The majority of lane detection system initially propose a model of a road. This model can be both something simple as straight lines or more complex splines. Some researchers make the assumption that the road is two parallel lines in the image, this can be done after an operation called inverse perspective mapping, which produces an bird's-eye view  perspective \cite{bertozzi1998gold}. One other common method is to assume that the lanes have a common vanishing point where the both lanes meet and use that as a reference for the lines in the image \cite{Yenikaya:2013:KVR:2522968.2522970}(Fler referenser).
 \subsection{Image acquisition}
-The image acquisition typically come from a camera that is mounted in the center of the vehicle. 
+The image acquisition typically come from a camera that is mounted in the center of the vehicle.
 \subsection{Preprocess}
-The preprocess is a step where the image is prepared for the next steps in terms of image resolution, where a lower image resolution is often preferred due to the high computational load that high resolution images bring. Everything that is not part of the Region of interest (ROI) is often removed. This typically means removing the region above the horizon. Often gray-scale images are preferred over color images due to reduced data load \cite{Yenikaya:2013:KVR:2522968.2522970}. Removal of unwanted disturbances such as shadows are often done in the preprocess. 
+The preprocess is a step where the image is prepared for the next steps in terms of image resolution, where a lower image resolution is often preferred due to the high computational load that high resolution images bring (KÄLLA). Everything that is not part of the Region of interest (ROI) is often removed. This typically means removing the region above the horizon. Often gray-scale images are preferred over color images due to reduced data load \cite{Yenikaya:2013:KVR:2522968.2522970}. Removal of unwanted disturbances such as shadows are often done in the preprocess. 
 
 
 Inverse Perspective mapping- Get rid of the perspective effect. 
@@ -78,9 +98,13 @@ For structured roads with clear line markings the edges are the most common feat
 \subsection{Model Fitting}
 As mentioned in the road model section, very often a road model is used and fitted to the observed information from the feature extraction section. 
 
-Outlines/inliners li
+The extracted data from the previous step would typically contain both inliers, i.e. data that can be fitted to a line, and outliers, i.e. data that cannot be fitted onto the same line. (Källa)
 
-Different algorithm for model fitting are RANSAC, Least Median Squares, 
+Assuming that the extracted data from previous steps contains data that can be fitted to one of the models chosen initially, several different approaches have been proposed for model fitting. (KÄLLA) 
+Some researchers use least squares method, which is a 
+
+Other research propose the use of "RANdom SAmple Consensus", known as the RANSAC algorithm (KÄLLOR). This method is stated to be superior to least squares method due to its ability to fit a line to the inliers only, without any influence of the outliers on the result.  
+
 
 \subsection{Time Integration}
 The last step that is important for a reliable lane detection system is to be able to incorporate some knowledge from previous frames 
