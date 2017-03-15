@@ -98,12 +98,12 @@ For structured roads with clear line markings the edges are the most common feat
 \subsection{Model Fitting}
 As mentioned in the road model section, very often a road model is used and fitted to the observed information from the feature extraction section. 
 
-The extracted data from the previous step would typically contain both inliers, i.e. data that can be fitted to a line, and outliers, i.e. data that cannot be fitted onto the same line. (Källa)
+The extracted data from the previous step would typically contain both inliers, i.e. data that can be fitted to a line, and outliers, i.e. data that cannot be fitted onto the same line. \cite{raguram2008comparative}
 
-Assuming that the extracted data from previous steps contains data that can be fitted to one of the models chosen initially, several different approaches have been proposed for model fitting. (KÄLLA) 
+Assuming that the extracted data from previous steps contains data that can be fitted to one of the models chosen initially, several different approaches have been proposed for model fitting \cite{BarHillel2014} 
 Some researchers use least squares method, which is a 
 
-Other research propose the use of "RANdom SAmple Consensus", known as the RANSAC algorithm (KÄLLOR). This method is stated to be superior to least squares method due to its ability to fit a line to the inliers only, without any influence of the outliers on the result.  
+Other research propose the use of "RANdom SAmple Consensus", known as the RANSAC algorithm \cite{huang2009finding}\cite{aly2008real} \cite{li2013lane}. This method is stated to be superior to least squares method due to its ability to fit a line to the inliers only, without any influence of the outliers on the result.  
 
 
 \subsection{Time Integration}

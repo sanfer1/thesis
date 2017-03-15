@@ -5,14 +5,20 @@ This chapter will introduce the subject of road and lane detection, and mixed ci
 
 \section{Background and problem description}
 There is a global trend to make vehicles more autonomous to reduce human error and workload. Most modern vehicles include safety-critical systems where a failure can cause great damage to both humans and the environment. When the implementation is a safety-critical system it is important to be certain of the risks that are present and how to cope with them. One other increasingly important trend in the design of real-time and embedded systems is the integration of components with different criticality onto the same hardware platform \cite{burns2013mixed}.
+  
 
-The $EMC^2$ project \cite{eu} is an initiative to drive the development of "Embedded Multi-Core systems for Mixed Criticality applications in dynamic and changeable real-time environments". One focus of the project is on automotive applications for example: "Advanced Driver Assistance Systems" (ADAS). ADAS are systems designed to help the driver and to increase the safety when driving. One system is the lane detection system to help keep the car within its lanes \cite{BarHillel2014}. What differs mixed criticality systems from regular systems is that two systems with different criticality are run on the same hardware platform. One example could be to run the lane detection system and the radio system on the same ECU.
 
+The $EMC^2$ project \cite{eu} is an initiative to drive the development of "Embedded Multi-Core systems for Mixed Criticality applications in dynamic and changeable real-time environments". One focus of the project is on automotive applications for example: "Advanced Driver Assistance Systems" (ADAS). ADAS are systems designed to help the driver and to increase the safety when driving. One system is the lane detection system to help keep the car within its lanes \cite{BarHillel2014}. What differs mixed criticality systems from regular systems is that two systems with different criticality are run on the same hardware platform. One example could be to run the ADAS and the infotainment system of the vehicle on the same ECU.
+
+
+"Road vehicles -functional safety", ISO 26262 is an international standard for the automotive industry regarding the electronic systems of the vehicles. ISO 26262 defines four automotive safety integrity levels, ASIL A, B, C and D. ASIL A has the lowest integrity requirements and ASIL D has the highest. The problem when implementing two applications of different criticality on the same platform is that both applications need to be certified for the level of the applications with the highest safety requirements. This means that in the case of integrating the ADAS and the infotainment system on the same hardware platform then one would need to certify the infotainment to ASIL D, which is a very tedious and thus expensive task.
+
+If it would be possible to isolate the two applications using virtualization, it would not require any extra work on certification compared to running the applications on separate ECUs.
 
 \section{Problem statement}
 Today there is a lot of research on ADAS where everything from "Lane Departure Warning (LDW)" to "Full autonomous driving" is investigated \cite{BarHillel2014}, \cite{Yenikaya:2013:KVR:2522968.2522970}, \cite{mccall2006video}. 
 
-However, there is not much research about the integration of ADAS on a mixed criticality system. For an example Autosar, which is a partnership for development of software founded by major players in the automotive industry does address mixed criticality systems in the sense that they recognize that the standards must be supported on their platforms \cite{burns2013mixed} \cite{auto}.
+However, there is a need for research about the integration of safety critical applications and non-safety critical applications on a mixed criticality platform where the two applications are isolated from each other using virtualization. For an example Autosar, which is a partnership for development of software founded by major players in the automotive industry does address mixed criticality systems in the sense that they recognize that the standards must be supported on their platforms \cite{burns2013mixed} \cite{auto}.
 
 This thesis will investigate different techniques for road and lane detection and how they can be implemented on the RTOS of a Mixed Criticality System. 
 
