@@ -1,5 +1,6 @@
 \chapter{State of the Art}
-In this chapter I will write about the literature study that has been carried out. Things to include in this chapter is: Lane detection in general, Image processing- hough transform etc.. MCS. Misra-c? Information about the board  (EMC2 and zedboard)
+This chapter will present the literature study that has been carried out. This chapter includes sections about
+lane detection in general and what modalities are the most frequently used. Image processing including edge detection and hough transform. MCS. Information about the board  (EMC2 and zedboard).
 
 \section{SAE Level}
 When talking about Advanced Driver Assistance Systems (ADAS) and autonomous vehicles it is important to define what it actually means. SAE International is a professional association and standards developing organization for transport industries. They have developed a new standard for autonomous driving called  "J3016: Taxonomy and Definitions for Terms Related to On-Road Motor Vehicle Automated Driving Systems,”. This standard defines six levels of driving automation, from no automation to full automation. \cite{SAE} \cite{SAEweb}. 
@@ -29,14 +30,12 @@ The main bottleneck in the development of ADAS systems is the perception problem
 Today there are several different sensing modalities used for lane detection. Some examples are monocular vision, stereo vision, LIDAR, IMU data, GPS.\\
 
 
-Vison is the most prominent research area due to the fact that road signs/markings are made for human vision. Vision sensors provides good position estimation on the road without the need for any other modalities. However, there are situations when vision sensors simply cannot perform well, for example in extreme weather conditions or when driving off-road. In this kind of situations it is possible to use sensor fusion with other sensor modalities to provide a better position estimate, and it is the reason why LIDAR and GPS are important compliments to vision for reaching full autonomous driving.\\
+Vision is the most prominent research area due to the fact that road signs/markings are made for human vision. Vision sensors provides good position estimation on the road without the need for any other modalities. However, there are situations when vision sensors simply cannot perform well, for example in extreme weather conditions or when driving off-road. In this kind of situations it is possible to use sensor fusion with other sensor modalities to provide a better position estimate, and it is the reason why LIDAR and GPS are important compliments to vision for reaching full autonomous driving.\\
 
 
-
-
-In its basic setting the lane detection problem seems like a simple one. The only thing needed is to detect a host lane and only for a short distance ahead. A simple Hough transform-based algorithm solves the problem in 90\% of highway cases %\citep{•}. 
+In its basic setting the lane detection problem seems like a simple one. The only thing needed is to detect a host lane and only for a short distance ahead. A simple Hough transform-based algorithm solves the problem in 90\% of highway cases \cite{BarHillel2014}. 
 But the impression that the problem is easy is misleading and building a useful system requires a huge R\& D effort. One of the reasons is the high reliability demands. In order to be useful the system needs to reach very low error rates. The exact amount of false alarms is still a subject of research \cite{BarHillel2014}.
-At 15 frames per second, 1 false alarm per hour means only one error in 54,000 frames. \\
+At 15 frames per second, 1 false alarm per hour means only one error in 54,000 frames.\\
 
 
 One factor that makes ADAS hard to implement on large scale is the large amount of different conditions that has to be taken care of. The main sources for condition diversity are:\\
@@ -65,7 +64,7 @@ Stereo imaging is the use of two cameras instead of one camera in order to obtai
 
 
 \section{Lateral Control}
-Pure pursuit
+Pure pursuit-
 \section{Convolutional Neural Networks}
 
 
@@ -80,11 +79,11 @@ Pure pursuit
 
 
 \subsection{Road model}
-The majority of lane detection system initially propose a model of a road. This model can be both something simple as straight lines or more complex splines. Some researchers make the assumption that the road is two parallel lines in the image, this can be done after an operation called inverse perspective mapping, which produces an bird's-eye view  perspective \cite{bertozzi1998gold}. One other common method is to assume that the lanes have a common vanishing point where the both lanes meet and use that as a reference for the lines in the image \cite{Yenikaya:2013:KVR:2522968.2522970}(Fler referenser).
+The majority of lane detection system initially propose a model of a road. This model can be both something simple as straight lines or more complex splines. Some researchers make the assumption that the road is two parallel lines in the image, this can be done after an operation called inverse perspective mapping, which produces an bird's-eye view  perspective \cite{bertozzi1998gold}. One other common method is to assume that the lanes have a common vanishing point where the both lanes meet and use that as a reference for the lines in the image \cite{Yenikaya:2013:KVR:2522968.2522970}\cite{jingyu2013lane}.
 \subsection{Image acquisition}
 The image acquisition typically come from a camera that is mounted in the center of the vehicle.
 \subsection{Preprocess}
-The preprocess is a step where the image is prepared for the next steps in terms of image resolution, where a lower image resolution is often preferred due to the high computational load that high resolution images bring (KÄLLA). Everything that is not part of the Region of interest (ROI) is often removed. This typically means removing the region above the horizon. Often gray-scale images are preferred over color images due to reduced data load \cite{Yenikaya:2013:KVR:2522968.2522970}. Removal of unwanted disturbances such as shadows are often done in the preprocess. 
+The preprocess is a step where the image is prepared for the next steps in terms of image resolution, where a lower image resolution is often preferred due to the high computational load that high resolution images bring \cite{Yenikaya:2013:KVR:2522968.2522970}. Everything that is not part of the Region of interest (ROI) is often removed. This typically means removing the region above the horizon. Often gray-scale images are preferred over color images due to reduced data load \cite{Yenikaya:2013:KVR:2522968.2522970}. Removal of unwanted disturbances such as shadows are often done in the preprocess. 
 
 
 Inverse Perspective mapping- Get rid of the perspective effect. 
@@ -107,11 +106,11 @@ Other research propose the use of "RANdom SAmple Consensus", known as the RANSAC
 
 
 \subsection{Time Integration}
-The last step that is important for a reliable lane detection system is to be able to incorporate some knowledge from previous frames 
+The last step that is important for a reliable lane detection system is to be able to incorporate some knowledge from previous frames. This is done in order to increase the reliability of the system and decrease the computational load.
 
 
 \section{Use case}
-My degree project will be about the perception problem for autonomous vehicles. The group is developing a vehicle platoon where one vehicle drives autonomously around a predefined track and a second vehicle is following the first. Use case number 3 in the safecop project description "Vehicle control loss warning" ties well with my own project. In the safecop project description there is mentioned "The US National Highway Traffic Safety Administration (NHTSA) has estimated that “V2V safety
+My degree project will be about the perception problem for autonomous vehicles. The group is developing a vehicle platoon where one vehicle drives autonomously around a predefined track and a second vehicle is following the first. Use case number 3 in the Safecop project description "Vehicle control loss warning" ties well with my own project. In the Safecop project description there is mentioned "The US National Highway Traffic Safety Administration (NHTSA) has estimated that “V2V safety
 applications have the potential to address approximately 80\% of crashes for unimpaired drivers”." The idea is to implement obstacle detection on the road and send out a warning to other vehicles in the platoon or close surrounding.
 
 With this use case in mind five requirements have been developed:\\

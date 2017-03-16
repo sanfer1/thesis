@@ -24,13 +24,12 @@ This thesis will investigate different techniques for road and lane detection an
 
 
 \section{Purpose and goal}
-The goal of the literature study is to give insight in the subject and answer the preliminary research questions:
+The goal of the literature study is to give insight in the subject and answer the preliminary research question:
 \begin{enumerate}  
 \item What are the existing lane keeping algorithms and how do they differ from each other? In order to study the performance two parameters that could be investigated are: computation time and memory footprint.
-\item How does mixed criticality affect the choice of method for road and lane following?
 \end{enumerate}
 
-After the literature study is done some conclusion will be drawn and hopefully above research questions can be answered. From that an implementation phase will begin where the lane detection algorithm should be implemented on the $EMC^2$-board which consist of two operating systems on the same platform. Figure 1 shows how the software architecture of the $EMC^2$-board is set up where the Linux part is achieved through virtualization. Arm Trustzone is a hardware isolation which does not allow non-secure software from the Linux OS to access secure memory resources. This guarantees that Linux can not interfere with FMP \cite{zaki2016embedded}. SafeG is a monitor which decides which operating system should run and when. SHAPE is a cloud for communication between different nodes. Currently SHAPE only works for the Linux OS.
+After the literature study is done some conclusion will be drawn and hopefully above research questions can be answered. From that an implementation phase will begin where the lane detection algorithm should be implemented on the $EMC^2$-board which consist of two operating systems on the same platform. Figure 1 shows how the software architecture of the $EMC^2$-board is set up where the Linux part is achieved through virtualization. Arm Trustzone is a hardware isolation which does not allow non-secure software from the Linux OS to access secure memory resources. This guarantees that Linux can not interfere with FMP \cite{zaki2016}. SafeG is a monitor which decides which operating system should run and when. SHAPE is a cloud for communication between different nodes. Currently SHAPE only works for the Linux OS.
 
 
 \begin{figure}[H]
@@ -49,10 +48,10 @@ The goal of the implementation phase is to evaluate how well a practical impleme
 \end{enumerate}
 
 \section{Goals}
-In this project there are both team goals and individual goals that do not necessarily align with each other.
+In this project there are five master thesis students working together on the same demonstator. This means that there are both individual goals and team goal which do not necessarily align with each other.
 
 \subsection{Team goal}
-The team goal is to develop a demonstrator which consists of two small RC-cars that are supposed to group into a vehicle convoy where the first car follows a predefined path marked on the ground and the other car follows the first.
+The team goal is to develop a demonstrator which consists of two small RC-vehicles that are supposed to group into a vehicle convoy where the first car follows a predefined path marked on the ground and the other car follows the first to demonstrate platoon driving.
 
 \subsection{Individual goal}
 The individual goal and expected outcome from this thesis is a study of existing road and lane detecting systems. Then comparing them to determine which is suitable for implementation in the safety critical system that the group is developing. The last part of the project is to implement the lane keeping algorithm on the RTOS of the mixed criticality system to demonstrate the functionality.
