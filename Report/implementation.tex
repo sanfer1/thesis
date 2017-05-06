@@ -61,11 +61,13 @@ The grayscale image is the input to the canny edge detection function. As descri
 This tresholded image is used as an input to the hough transform function that is used for line detection. The function works by::(FÖRKLARING HOUGH)
 
 Now the lines are detected and the data  output from the houghlines function need to be handled in some way. 
-The algotihm created works by splititng the image into two halves and making the asumption that we have one lane in each of the two halves. By measuring the distance to the line from the center of the image, the error is calculated as error = xtot - 320
+The algotihm created works by splititng the image into two halves and making the asumption that we have one lane in each of the two halves. By measuring the distance to the line from the center of the image, the error is calculated as $error = xtot - x_mid$
 
 
 These steps are all done in the raspberry pi thanks to its easy camera implementation and that it supports OpenCV. The error is then sent to the emc2 board where the lateral control is done using the error from the RPi. A PID controller for the steering servo is developed using z transform.
 
 
 
+
+\section{Lateral control}
 
