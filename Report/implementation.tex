@@ -29,15 +29,10 @@ The pi camera module has been chosen as image acquisition device for this projec
 
 
 
-\section{System architecture}
 
+\includepdf[scale=0.8,pages=1,pagecommand=\section{System architecture}]{./img/architecture.pdf}
 
 \section{Lane detection algorithm}
-
-
-Steg: Preprocess - gray + roi
-edge - canny
-hough trasform
 
 
 This chapter will describe the algorithms used for lane detection that have been implemented on the demonstator of this project. 
@@ -53,21 +48,40 @@ Following step is to convert the image to gray scale to prepare it for nextcomin
 
 
 
-INSERT ORIGINAL/GRAYSCALE PICTURE
+\begin{figure}[H]
+  \includegraphics[scale=0.7]{./img/gray.png}
+  \centering
+  \caption{Input image converted to grayscale}
+  \label{fig:Input image converted to grayscale}
+\end{figure}
 
 
 The grayscale image is the input to the canny edge detection function. As described in the state of the art section the output of the canny function is a thresholded image where all the pixels that are part of edges are set to white and all pixels that are not part of edges are set black.
 
+\begin{figure}[H]
+  \includegraphics[scale=0.7]{./img/edges.png}
+  \centering
+  \caption{Tresholded image using canny filter}
+  \label{fig:Tresholded image using canny filter}
+\end{figure}
+
 This tresholded image is used as an input to the hough transform function that is used for line detection. The function works by::(FÖRKLARING HOUGH)
 
+
+\begin{figure}[H]
+  \includegraphics[scale=0.7]{./img/detected_lines.png}
+  \centering
+  \caption{Detected lines}
+  \label{fig:Detected lines}
+\end{figure}
+
+
 Now the lines are detected and the data  output from the houghlines function need to be handled in some way. 
-The algotihm created works by splititng the image into two halves and making the asumption that we have one lane in each of the two halves. By measuring the distance to the line from the center of the image, the error is calculated as $error = xtot - x_mid$
+The algotihm created works by splititng the image into two halves and making the asumption that we have one lane in each of the two halves. By measuring the distance to the line from the center of the image, the error is calculated as $error = xtot - xmid$
 
-
-These steps are all done in the raspberry pi thanks to its easy camera implementation and that it supports OpenCV. The error is then sent to the emc2 board where the lateral control is done using the error from the RPi. A PID controller for the steering servo is developed using z transform.
 
 
 
 
 \section{Lateral control}
-
+So far all of these steps are all done on the Raspberry Pi thanks to its easy camera implementation and that it supports OpenCV. The error is then sent to the EMC2 board where the lateral control is done using the error from the RPi. A PID controller for the steering servo is developed using z transform.
