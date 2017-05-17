@@ -33,7 +33,7 @@ The pi camera module has been chosen as image acquisition device for this projec
 \includepdf[scale=0.8,pages=1,pagecommand=\section{System architecture}]{./img/architecture.pdf}
 
 \section{Lane detection algorithm}
-
+CHANGE ALL THREE PICTURES TO BETTER ONES\\
 
 This chapter will describe the algorithms used for lane detection that have been implemented on the demonstrator of this project. 
 
@@ -101,7 +101,7 @@ To know how the system will behave when being fed with different PWM values an e
   \label{fig:Angle measurement}
 \end{figure}
 
-The mean value of the angle outputs have been calculated and and a first order polynomial have been fitted to the data points using the least squares method. The line calculated has the equation $$ y=-12.2x + 179.6$$
+The mean value of the angle outputs have been calculated and and a first order polynomial have been fitted to the data points using the least squares method. The line calculated has the equation $$ y=-14.26x + 195.96$$
 
 \begin{figure}[H]
   \includegraphics[scale=0.9]{./img/PWMPLOT.png}
@@ -110,3 +110,13 @@ The mean value of the angle outputs have been calculated and and a first order p
   \label{fig:PWM and angle correlation}
 \end{figure}
 
+This line equation is used in the steering control system to evaluate the steering angle compared to the identified line angles.
+
+
+\section{Implementation and integration with zedboard}
+\subsection{Tasks}
+What are all the tasks on the zedboard
+\subsection{Criticality}
+EDF, FP ?? which scheduling algorithm should be used?
+\subsection{Timing requirements}
+Worst case execution time
