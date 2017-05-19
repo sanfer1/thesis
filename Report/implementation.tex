@@ -1,6 +1,6 @@
 \chapter{Implementation}
 
-
+\section{EMC2 board specification}
 \section{Raspberry pi}
 This section will describe the single board computer that is used for lane detection in this degree project. The chosen board is a Raspberry Pi 3 which is a credit card sized computer. The third generation of the raspberry has seen some major hardware updates compared to earlier versions. The one used in this project has the following specifications:
 
@@ -110,7 +110,7 @@ To know how the system will behave when being fed with different PWM values an e
 \end{figure}
 
 
-In the captured pictures from the camera i can calculate the angle of the centerline using the known x and y values. The x in the picture is calculated as $$x = abs(x1-x2)$$ and y is calculated as $$y=abs(y1-y2)$$ and the angle is obtained using $$tan(\alpha)=\frac{y}{x}$$ and thus $$\alpha = arctan(\frac{y}{x})$$
+In the captured images from the camera the angle of the centerline can be calculated using the known x and y values. The x in the picture is calculated as $$x = abs(x1-x2)$$ and y is calculated as $$y=abs(y1-y2)$$ and the angle is obtained using $$tan(\alpha)=\frac{y}{x}$$ and thus $$\alpha = arctan(\frac{y}{x})$$
 
 
 The mean value of the angle outputs have been calculated and and a first order polynomial have been fitted to the data points using the least squares method. The line calculated is shown in figure  \ref{fig:PWM and angle correlation} and has the equation $$ y=-14.26x + 195.96$$
@@ -136,7 +136,7 @@ What are all the tasks on the zedboard
   \caption{sequence diagram}
   \label{fig:sequence diagram}
 \end{figure}
-
+ As shown in figure \ref{fig:sequence diagram} there are currently three tasks scheduled that run on the real time operating system. The task are communication, lateral control and longitudinal control. There will eventually be more tasks implemented including one task to switch to the non critical operating system.
 
 \subsection{Criticality}
 EDF, FP ?? which scheduling algorithm should be used? Fixed Priority will be used in the end probably
