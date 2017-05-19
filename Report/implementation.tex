@@ -49,7 +49,7 @@ Following step is to convert the image to gray scale to prepare it for next comi
 
 
 \begin{figure}[H]
-  \includegraphics[scale=0.7]{./img/gray.png}
+  \includegraphics[width=\textwidth]{./img/gray.png}
   \centering
   \caption{Input image converted to grayscale}
   \label{fig:Input image converted to grayscale}
@@ -59,7 +59,7 @@ Following step is to convert the image to gray scale to prepare it for next comi
 The gray scale image is the input to the canny edge detection function. As described in the state of the art section the output of the canny function is a thresholded image where all the pixels that are part of edges are set to white and all pixels that are not part of edges are set black.
 
 \begin{figure}[H]
-  \includegraphics[scale=0.7]{./img/edges.png}
+  \includegraphics[width=\textwidth]{./img/edges.png}
   \centering
   \caption{Tresholded image using canny filter}
   \label{fig:Tresholded image using canny filter}
@@ -72,7 +72,7 @@ The hough transform evaluates the thresholded image by discretizing all
 
 
 \begin{figure}[H]
-  \includegraphics[scale=0.7]{./img/detected_lines.png}
+  \includegraphics[width=\textwidth]{./img/detected_lines.png}
   \centering
   \caption{Detected lines}
   \label{fig:Detected lines}
@@ -95,22 +95,28 @@ To know how the system will behave when being fed with different PWM values an e
 
 
 \begin{figure}[H]
-  \includegraphics[scale=0.25]{./img/anglepic.JPG}
+  \includegraphics[width=\textwidth]{./img/anglepic.JPG}
   \centering
   \caption{Angle measurement}
   \label{fig:Angle measurement}
 \end{figure}
 
 
-Skisstext: I mina bilder så räknas x ut genom abs(x1-x2)  och y genom abs(y1-y2) och sedan anväder jag att tan alfa = y/x och alfa = atan(y/x). Lägg in bild + förklara x och y i bilden från kameran.
+\begin{figure}[H]
+  \includegraphics[scale=0.25]{./img/angle.JPG}
+  \centering
+  \caption{angle}
+  \label{fig:angle}
+\end{figure}
 
 
+In the captured pictures from the camera i can calculate the angle of the centerline using the known x and y values. The x in the picture is calculated as $$x = abs(x1-x2)$$ and y is calculated as $$y=abs(y1-y2)$$ and the angle is obtained using $$tan(\alpha)=\frac{y}{x}$$ and thus $$\alpha = arctan(\frac{y}{x})$$
 
 
-The mean value of the angle outputs have been calculated and and a first order polynomial have been fitted to the data points using the least squares method. The line calculated has the equation $$ y=-14.26x + 195.96$$
+The mean value of the angle outputs have been calculated and and a first order polynomial have been fitted to the data points using the least squares method. The line calculated is shown in figure  \ref{fig:PWM and angle correlation} and has the equation $$ y=-14.26x + 195.96$$
 
 \begin{figure}[H]
-  \includegraphics[scale=0.9]{./img/PWMPLOT.png}
+  \includegraphics[width=\textwidth]{./img/PWMPLOT_2.png}
   \centering
   \caption{PWM and angle correlation}
   \label{fig:PWM and angle correlation}
@@ -118,11 +124,21 @@ The mean value of the angle outputs have been calculated and and a first order p
 
 This line equation is used in the steering control system to evaluate the steering angle compared to the identified line angles.
 
+This is used in combination with the position control to eliminate the deviation from the centerline and thus improve performance of the system.
 
 \section{Implementation and integration with zedboard}
 \subsection{Tasks}
 What are all the tasks on the zedboard
+
+\begin{figure}[H]
+  \includegraphics[width=\textwidth]{./img/sekvensdiagram.png}
+  \centering
+  \caption{sequence diagram}
+  \label{fig:sequence diagram}
+\end{figure}
+
+
 \subsection{Criticality}
-EDF, FP ?? which scheduling algorithm should be used?
+EDF, FP ?? which scheduling algorithm should be used? Fixed Priority will be used in the end probably
 \subsection{Timing requirements}
 Worst case execution time
