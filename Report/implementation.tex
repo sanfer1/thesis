@@ -28,8 +28,6 @@ The pi camera module has been chosen as image acquisition device for this projec
 
 
 
-
-
 \includepdf[scale=0.8,pages=1,pagecommand=\section{System architecture}]{./img/architecture.pdf}
 
 \section{Lane detection algorithm}
@@ -65,10 +63,7 @@ The gray scale image is the input to the canny edge detection function. As descr
   \label{fig:Tresholded image using canny filter}
 \end{figure}
 
-This thresholded image is used as an input to the hough transform function that is used for line detection. The function works by::(FÖRKLARING HOUGH)
-
-
-The hough transform evaluates the thresholded image by discretizing all
+This thresholded image is used as an input to the Hough transform function that is used for line detection.
 
 
 \begin{figure}[H]
@@ -136,9 +131,21 @@ What are all the tasks on the zedboard
   \caption{sequence diagram}
   \label{fig:sequence diagram}
 \end{figure}
- As shown in figure \ref{fig:sequence diagram} there are currently three tasks scheduled that run on the real time operating system. The task are communication, lateral control and longitudinal control. There will eventually be more tasks implemented including one task to switch to the non critical operating system.
+ As shown in figure \ref{fig:sequence diagram} there are currently three tasks scheduled that run on the real time operating system. The tasks implemented on the board are described below.
+ 
+\subsubsection{Communication}
+\subsubsection{Lateral Control}
+\subsubsection{Longitudinal Control} 
+ 
+ 
+There will eventually be more tasks implemented including one task to switch to the non critical operating system.
 
 \subsection{Criticality}
 EDF, FP ?? which scheduling algorithm should be used? Fixed Priority will be used in the end probably
+\subsubsection{Priority}
+\subsubsection{Earliest Deadline First}
+\subsubsection{Rate Monotonic}
+\subsubsection{Deadline Monotonic}
+
 \subsection{Timing requirements}
-Worst case execution time
+How long time does every process take and how much is the WCET?
