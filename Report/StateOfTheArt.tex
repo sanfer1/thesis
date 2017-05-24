@@ -26,7 +26,7 @@ When talking about Advanced Driver Assistance Systems (ADAS) and autonomous vehi
 \end{table}
 
 
-When developing automated vehicles there are many functional safety requirements that must be fully verified and validated. One importance area is the vehicle actuation systems which are totally controlled by electronic systems. As the actuators are controlled by electronic systems they are strongly linked to other so called by-wire systems. Examples are drive-by-wire and brake-by-wire. These systems do not have any mechanical coupling between the different elements but instead utilize sensors that read position of the brake pedal or steering wheel. In the development of these systems aspects as redundancy of the ECUs, sensors, actuators and power supply is required \cite{stolte2016safety}. 	The standard ISO 26262 is the most recent standard available concerning functional safety of electrical systems in the automotive industry. The standard requires determination of safety goals as part of hazard analysis and risk assessment. Once all the safety goals are defined, then functional safety requirements can be formulated.
+When developing automated vehicles there are many functional safety requirements that must be fully verified and validated. One importance area is the vehicle actuation systems which are totally controlled by electronic systems. As the actuators are controlled by electronic systems they are strongly linked to other so called by-wire systems. Two examples are drive-by-wire and brake-by-wire. These systems do not have any mechanical coupling between the different elements but instead utilize sensors that read position of the brake pedal or steering wheel. In the development of these systems aspects as redundancy of the ECUs, sensors, actuators and power supply is required \cite{stolte2016safety}. 	The standard ISO 26262 is the most recent standard available concerning functional safety of electrical systems in the automotive industry. The standard requires determination of safety goals as part of hazard analysis and risk assessment. Once all the safety goals are defined, then functional safety requirements can be formulated.
 
 According to \cite{stolte2016safety} it is needed to adopt measures that go beyond the state-of-the-art of modern production vehicles for ensuring functional safety of automated vehicles. The authors point out that despite the importance of series deployment of automated vehicles, there is not much discussion about safety requirements within the ITS community.  
 
@@ -60,11 +60,12 @@ Vision is the most prominent research area due to the fact that road signs/marki
 
 
 
-The monocular vision system is frequently used for road and lane detection. It is more simply put one camera mounted on the vehicle. The required resolution can be derived from $N_p = \frac{Cd}{w}$, where $N_p$ is the number of horizontal pixels, $C$ is the camera field of view width in radians. $w$ is the lane mark width in meter \cite{BarHillel2014}.\\
+The monocular vision system is frequently used for road and lane detection. It is more simply put one camera mounted on the vehicle. The required resolution can be derived from $$N_p = \frac{Cd}{w}$$where $N_p$ is the number of horizontal pixels, $C$ is the camera field of view width in radians. $w$ is the lane mark width in meter \cite{BarHillel2014}.\\
+
 When humans drive we continuously look at the road boundaries, the lane markings and the road texture among other things. These road boundaries are designed so that they should be visible for human drivers in all driving conditions. Self driving vehicles that are supposed to share the road with human drivers will therefore most likely have to rely on the same perceptual cues as humans.
 
 \subsubsection{LIDAR}
-Light detection and ranging (LIDAR) is a modality that have been used to a large extent in the development of autonomous vehicles for research purposes. The LIDAR measures the environment around the vehicle in 3D. The LIDAR sends out light pulse and measures the time for it to come back. As it is an active light source it is not dependent of having good natural lighting as with a regular camera. 
+Light detection and ranging (LIDAR) is a modality that have been used to a large extent in the development of autonomous vehicles for research purposes. The LIDAR measures the environment around the vehicle in 3D. The LIDAR sends out light pulse and measures the time for it to come back. As it is an active light source it is not dependent of having good natural lighting as with a regular camera.\\
 
 LIDAR sensors can perform well in certain situations for example in rural areas to detect road boundaries, \cite{BarHillel2014} but are not well suited for multilane roads without vision data. As the LIDAR only measures 3D structures it not able to detect road markings, although some research have been done on intensity measurement with LIDAR \cite{huang2009finding} \cite{kammel2008lidar} which would make it possible to detect line markings to some extent. One huge drawback with this modality is that the sensors are still very expensive and thus not yet an alternative for implementation in regular passenger vehicles.
 
@@ -75,8 +76,7 @@ Stereo imaging is the use of two cameras instead of one camera in order to obtai
 \subsubsection{GIS, GPS, IMU}
 Geographical information system (GPS) is currently widely used for navigation systems. Using GPS it is possible to know the vehicle position within XX accuracy. 
 
-One problem with GPS is the reliability. GPS requires connection with enough satellites to function properly and that connection can be lost due to many reasons. Some level of lost connection can be tolerated by using IMU intergration to calculate current position. 
-
+One problem with GPS is the reliability. GPS requires connection with enough satellites to function properly and that connection can be lost due to many reasons. Some level of lost connection can be tolerated by using inertial measurement unit (IMU) intergration to calculate current position. 
 
 
 
@@ -107,7 +107,7 @@ For structured roads with clear line markings the edges are the most common feat
 
 Hough transform (HT) is then applied to the image in order to determine if there is an edge at one certain pixel or not. The Hough transform was originally invented 1962 and has since that been refined to the way it is universally used today. The HT works by converting the white pixels from the thresholded input image to points in the parameter coordinate space, meaning they will be represented using a direction theta and distance r instead of x an y.
 
-Each point in the parameter space has a count, and each point in the image space has a vote. Edge pixels with the same theta and r value are assumed to define a line in the image. To compute the frequency of each line theta and r are put in a number of so called bins.  When all the edge pixels have been converted to parameter space these bins can be analyzed and the ones with the most amount of votes are the most prominent lines in the image. Usually a threshold is set where counts that does not exceed the threshold are ignored and only the most prominent lines are accepted.
+Each point in the parameter space has a count, and each point in the image space has a vote. Edge pixels with the same theta and r value are assumed to define a line in the image. To compute the frequency of each line theta and r are put in a number of so called bins.  When all the edge pixels have been converted to parameter space these bins can be analyzed and the ones with the most amount of votes are the most prominent lines in the image. Usually a threshold is set where counts that does not exceed the threshold are ignored and only the most prominent lines are accepted \cite{davies}.
 
 
 \subsection{Model Fitting}
@@ -126,44 +126,35 @@ The last step that is important for a reliable lane detection system is to be ab
 
 
 \section{Use case}
-My degree project will be about the perception problem for autonomous vehicles. The group is developing a vehicle platoon where one vehicle drives autonomously around a predefined track and a second vehicle is following the first. Use case number 3 in the Safecop project description "Vehicle control loss warning" ties well with my own project. In the Safecop project description there is mentioned "The US National Highway Traffic Safety Administration (NHTSA) has estimated that “V2V safety
-applications have the potential to address approximately 80\% of crashes for unimpaired drivers”." The idea is to implement obstacle detection on the road and send out a warning to other vehicles in the platoon or close surrounding.
+This thesis project is part of a larger project conducted by Alten which aims at developing a complete prototype of an intelligent transport system (ITS). In this ITS there will be two vehicles showing the concept of vehicle platooning. The vehicles will be fully autonomous and connected to the infratructure. The project is part of a large EU-project called Safecop which stands for Safe Cooperating Cyber-Physical Systems using Wireless Communication. By using wireless communication one can send commands to the vehicles in the platoon. For example if the conditions are satisfiened, e. g. good connection the ITS can send a command to the vehicle to engage in platoon mode. When they are in platoon mode and one vehicle detects slippery road surface, it can communicate it to the rest of the platoon and the distance between the vehicles can be increased to some predefined safety distance.\\
 
-With this use case in mind five requirements have been developed:\\
+The vehicles main computing board will contain components of different criticality which means that it is a mixed-criticality system. In a mixed criticality system it is important that the non-safety critical components can not in any way interfere with the safety critical components.\\
 
-1. The system should be able to keep a constant speed v while keeping track of the road.\\
-2. If any object is detected on the road, the vehicle platoon should do an emergency stop.\\
-3. If a vehicle in the platoon sends out a warning to other vehicles in the platoon, they should stop within the time limit of x s. \\
-4. \\
-5\\
+
+This thesis project focuses on the percetion problem and the lateral control of the vehicles. The goal is to develop a system that can keep the vehicles within the lane boundaries while keeping satisfactory speed forward. The investigation will be of experimental nature and an evaluation if this platform is appropriate for future use in similar applications will be carried out.
+
+
+%In the Safecop project description there is mentioned "The US National Highway Traffic Safety Administration (NHTSA) has estimated that “V2V safety applications have the potential to address approximately 80\% of crashes for unimpaired drivers”." The idea is to implement obstacle detection on the road and send out a warning to other vehicles in the platoon or close surrounding.
+
 
 \section{Platooning}
 As the traffic intensity increases in the world, the problem with traffic congestion comes with it. In and around large cities today there are already huge problems due to heavy traffic. The situation leads to increasing emissions of greenhouse gases such as carbon dioxide. One way to ease the problem of traffic congestion and reduce the fuel consumption of vehicles is vehicle platooning. The concept of vehicle platooning is to reduce the distance between the vehicles on the road and thus reducing the wind resistance acting on each vehicle. Today most of the research cover the topic of heavy duty vehicles (HDV), where trucks are used to form a platoon on highways. Modern commercially available driver assistance systems such as adaptive cruise control use radar measurements to know relative distance and velocity to preceding vehicle and adjusts its own velocity automatically. This strategy works sufficiently good if the distance between the vehicles is long enough due to delays from measurements of the preceding vehicle to actuation of accelerating or braking torque at the wheels.\\
 
 One effort to reduce the distance between the vehicles in the platoon while maintaining the safety requirements is to send a brake signal through wireless communication to the other vehicles in the platoon. This would allow for a faster actuation of the brakes compared to only using radar. In research done by \cite{alam2014guaranteeing}, it is stated that if two identical vehicles are in a platoon on a highway road driving 90 km/h they can hold a minimum relative distance from each other of 1.2 m without endangering safety. In a scenario where a worst case delay of 500 ms is present in the system a minimum of 2 m distance should be kept. This distance is significantly shorter than what a modern adaptive cruise control achieves in order to keep a safe distance to preceding vehicle.\\
 
-When developing automated vehicles there are many functional safety requirements that must be fully verified and validated. One important area is the vehicle actuation systems which are totally controlled by electronic systems. As the actuators are controlled by electronic systems they are strongly linked to other so called by-wire systems. Examples are drive-by-wire and brake-by-wire. These systems do not have any mechanical coupling between the different elements but instead utilize sensors that read position of the brake pedal or steering wheel. In the development of these systems aspects as redundancy of the ECUs, sensors, actuators and power supply is required \cite{stolte2016safety}. 	The standard ISO 26262 is the most recent standard available concerning functional safety of electrical systems in the automotive industry. The standard requires determination of safety goals as part of hazard analysis and risk assessment. Once all the safety goals are defined, then functional safety requirements can be formulated.\\
-
-According to \cite{stolte2016safety} it is needed to adopt measures that go beyond the state-of-the-art of modern production vehicles for ensuring functional safety of automated vehicles. The authors point out that despite the importance of series deployment of automated vehicles, there is not much discussion about safety requirements within the ITS community. 
-
-
 
 %\section{Convolutional Neural Networks}
 
 
 \section{OpenCV}
-OpenCV is an open source computer vision and machine learning software library. The library has a large amount of optimized algorithms for computer vision. A few areas where OpenCV is used are face recognition, object detection, tracking of moving objects and lane detection. Because OpenCv is a BSD-licensed product, it is free to both utilize and modify the code by companies all over the world. Companies like Google, Microsoft, Intel, Honda and Toyota employ the library for use in various different applications.
-
-OpenCV has C++, C, Python, Java and Matlab interfaces and supports all the major operating systems.
+OpenCV is an open source computer vision and machine learning software library. The library has a large amount of optimized algorithms for computer vision. A few areas where OpenCV is used are face recognition, object detection, tracking of moving objects and lane detection. Because OpenCv is a BSD-licensed product, it is free to both utilize and modify the code by companies all over the world. Companies like Google, Microsoft, Intel, Honda and Toyota employ the library for use in various different applications. OpenCV has C++, C, Python, Java and Matlab interfaces and supports all the major operating systems.\\
 
 In this project several OpenCV funtions have been utilized mainly in the image processing part. More information about how it is implemented come s in next section \cite{opencv}
 
 \section{Mixed-criticality Systems}
-A trend in modern embedded systems is to take advantage of all the processing power available in a multicore processor chip. By combining different subsystems onto one chip it is possible to  achieve higher CPU utilization and thus reduce hardware cost and power consumption. Oftentimes these embedded systems contain components of different criticality. For the automotive industry that this thesis focuses on one example could be to run the ADAS and the infotainment system of the vehicle on the same electric control unit (ECU). If these two components are integrated onto a single hardware platform, the response time of the ADAS system should not be affected of the infotainment system. By scheduling these two components onto the same computing platform one creates a mixed-criticality system. 
-Each industry field (automotive, aerospace, railway, etc) has certain safety and security regulations that the mixed criticality systems needs to comply with. There are several different criticality levels in in each industry that depend on on elements such as environment of operation and danger to human life\cite{zaki2016}
+A trend in modern embedded systems is to take advantage of all the processing power available in a multicore processor chip. This can be done by combining different subsystems onto one chip it is possible to  achieve higher CPU utilization and thus reduce hardware cost and power consumption. Oftentimes these embedded systems contain components of different criticality. For the automotive industry that this thesis focuses on one example could be to run the ADAS and the infotainment system of the vehicle on the same electric control unit (ECU). If these two components are integrated onto a single hardware platform, the response time of the ADAS system should not be affected of the infotainment system. By scheduling these two components onto the same computing platform one creates a mixed-criticality system.\\
 
-
-According to \cite{SIL} safety can be defined as the absence of unacceptable risk. A system is safe if the risk associated with the system is acceptable. 
+Each industry field (automotive, aerospace, railway, etc) has certain safety and security regulations that the mixed criticality systems needs to comply with. There are several different criticality levels in each industry that depend on elements such as environment of operation and danger to human life\cite{zaki2016}. According to \cite{SIL} safety can be defined as the absence of unacceptable risk. A system is safe if the risk associated with the system is acceptable. 
 
 
 
