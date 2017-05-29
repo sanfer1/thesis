@@ -30,16 +30,45 @@ The pi camera module has been chosen as image acquisition device for this projec
 
 \includepdf[scale=0.8,pages=1,pagecommand=\section{System architecture}]{./img/architecture.pdf}
 
+
+\section{System Identification}
+To know how the system will behave when being fed with different PWM values an experimental setup has been developed and many (136) different PWM inputs and steering angle outputs have been measured.
+
+
+\begin{figure}[H]
+  \includegraphics[width=\textwidth]{./img/anglepic.JPG}
+  \centering
+  \caption{Angle measurement}
+  \label{fig:Angle measurement}
+\end{figure}
+
+
+The mean value of the angle outputs have been calculated and and a first order polynomial have been fitted to the data points using the least squares method. The line calculated is shown in figure  \ref{fig:PWM and angle correlation} and has the equation $$ y=-14.26x + 195.96$$
+
+\begin{figure}[H]
+  \includegraphics[width=\textwidth]{./img/PWMPLOT_2.png}
+  \centering
+  \caption{PWM and angle correlation}
+  \label{fig:PWM and angle correlation}
+\end{figure}
+
+This line equation is used in the steering control system to evaluate the steering angle compared to the identified line angles.
+
+This is used in combination with the position control to eliminate the deviation from the centerline and thus improve performance of the system.
+
+
 \section{Lane detection algorithm}
 CHANGE ALL THREE PICTURES TO BETTER ONES\\
 
 This chapter will describe the algorithms used for lane detection that have been implemented on the demonstrator of this project. 
 
-The algorithm that has been implemented on the demonstrator so far consist of the following steps:
+The algorithm that has been implemented on the demonstrator so far consist of the following steps:\\
 
-The lane detection process starts with grabbing a frame from the pi camera and applying a few preprocessing steps to the image. 
+The lane detection process starts with grabbing a frame from the pi camera and applying a few preprocessing steps to the image.\\
 
-The first step is to crop the image to only contain the region of interest (ROI). This is a camera setting that can be predefined so that the camera only grabs the ROI and thus not need to crop it after the frame is grabbed.
+The first step is to crop the image to only contain the region of interest (ROI). This is a camera setting that can be predefined so that the camera only grabs the ROI and thus not need to crop it after the frame is grabbed.\\
+
+INPUT IMAGE
 
 
 Following step is to convert the image to gray scale to prepare it for next coming operations. 
@@ -73,29 +102,18 @@ This thresholded image is used as an input to the Hough transform function that 
   \label{fig:Detected lines}
 \end{figure}
 
+The were a lot of problems when developing the algorithm in terms of false positives when evaluating the lines in the image. A solution was developed in order to eliminate the false lines in the image and only keep the the lines that are part of a road lane.\\
 
-Now the lines are detected and the data  output from the houghlines function need to be handled in some way. 
-The algorithm created works by splitting the image into two halves and making the assumption that we have one lane in each of the two halves. By measuring the distance to the line from the center of the image, the error is calculated as $error = xtot - xmid$
-
-
+The concept behind this lane detection algorithm solution is to group lines in the image that are very close to each other. So for instance if we find several lines on both the left and right lane of the road, these form two groups of lines because the lines are close to each other. If there are other lines in the image that are not very close to these two lanes, they will be put in a separate group. There can be multiple groups depending on how many false lines that are detected. In the end the groups are evaluated and the two groups with the most number of lines in them are the one that are regarded as lanes. This gives a very robust lane detection algorithm that disregards false positives from the hough transform. 
 
 
 
 \section{Lateral control}
-So far all of these steps are all done on the Raspberry Pi thanks to its easy camera implementation and that it supports OpenCV. The error is then sent to the EMC2 board where the lateral control is done using the error from the RPi. A PID controller for the steering servo is developed using z transform.
+Now the lines are detected and the vehicle need to be controled in some way using the information from the lane detection. So far all of these steps are all done on the Raspberry Pi thanks to its easy camera implementation and that it supports OpenCV.\\
 
+There are two errors that are calculated and from which the vehicle is controlled by. The positional error is calculated by splitting the image into two halves and making the assumption that we have one lane in each of the two halves. By measuring the distance to the line from the center of the image, the error is calculated as $error = xtot - xmid$\\
 
-\section{System ID}
-To know how the system will behave when being fed with different PWM values an experimental setup has been developed and many (136) different PWM inputs and steering angle outputs have been measured.
-
-
-\begin{figure}[H]
-  \includegraphics[width=\textwidth]{./img/anglepic.JPG}
-  \centering
-  \caption{Angle measurement}
-  \label{fig:Angle measurement}
-\end{figure}
-
+The other error used for control is the angle by which the vehicle is travelling forward compared to the angle of the road. This is calculated from the captured images and compared to the vehicles angle with the information from the system identification.\\
 
 \begin{figure}[H]
   \includegraphics[scale=0.25]{./img/angle.JPG}
@@ -105,25 +123,17 @@ To know how the system will behave when being fed with different PWM values an e
 \end{figure}
 
 
-In the captured images from the camera the angle of the centerline can be calculated using the known x and y values. The x in the picture is calculated as $$x = abs(x1-x2)$$ and y is calculated as $$y=abs(y1-y2)$$ and the angle is obtained using $$tan(\alpha)=\frac{y}{x}$$ and thus $$\alpha = arctan(\frac{y}{x})$$
+In the captured images from the camera the angle of the centerline can be calculated using the known x and y values. The x in the picture is calculated as $$x = abs(x1-x2)$$ and y is calculated as $$y=abs(y1-y2)$$ and the angle is obtained using $$tan(\alpha)=\frac{y}{x}$$ and thus $$\alpha = arctan(\frac{y}{x})$$\\
+
+The two errors are combined and then sent to the EMC2 board where the lateral control is scheduled and executed on the mixed criticality platform.\\
+
+A PID controller for the steering servo is developed using z transform.
 
 
-The mean value of the angle outputs have been calculated and and a first order polynomial have been fitted to the data points using the least squares method. The line calculated is shown in figure  \ref{fig:PWM and angle correlation} and has the equation $$ y=-14.26x + 195.96$$
-
-\begin{figure}[H]
-  \includegraphics[width=\textwidth]{./img/PWMPLOT_2.png}
-  \centering
-  \caption{PWM and angle correlation}
-  \label{fig:PWM and angle correlation}
-\end{figure}
-
-This line equation is used in the steering control system to evaluate the steering angle compared to the identified line angles.
-
-This is used in combination with the position control to eliminate the deviation from the centerline and thus improve performance of the system.
 
 \section{Implementation and integration with zedboard}
 \subsection{Tasks}
-What are all the tasks on the zedboard
+As shown in figure \ref{fig:sequence diagram} there are currently three tasks scheduled that run on the real time operating system.
 
 \begin{figure}[H]
   \includegraphics[width=\textwidth]{./img/sekvensdiagram.png}
@@ -131,21 +141,29 @@ What are all the tasks on the zedboard
   \caption{sequence diagram}
   \label{fig:sequence diagram}
 \end{figure}
- As shown in figure \ref{fig:sequence diagram} there are currently three tasks scheduled that run on the real time operating system. The tasks implemented on the board are described below.
+The tasks implemented on the board are described below.
  
 \subsubsection{Communication}
+In this task all the vehicle-to-vehicle (V2V) communication and vehicle-to-infrastructure (V2I) communication is done. The information that is sent is:
 \subsubsection{Lateral Control}
+In this task the lateral control described earlier is executed
 \subsubsection{Longitudinal Control} 
  
  
-There will eventually be more tasks implemented including one task to switch to the non critical operating system.
+There will eventually be more tasks implemented including one task to switch to the non-critical operating system.
 
 \subsection{Criticality}
-EDF, FP ?? which scheduling algorithm should be used? Fixed Priority will be used in the end probably
-\subsubsection{Priority}
-\subsubsection{Earliest Deadline First}
-\subsubsection{Rate Monotonic}
-\subsubsection{Deadline Monotonic}
+All the task are scheduled with fixed priority. The prority of the tasks are:
+
+
+\begin{enumerate}
+  \item Communication
+  \item Lateral control
+  \item Data aggregation
+  \item Longitudinal control
+\end{enumerate}
+
+
 
 \subsection{Timing requirements}
-How long time does every process take and how much is the WCET?
+WCET for the lateral control task is calculated as the end-to-end time which starts from the image acquisition in the raspberry pi, to the controlsigral that the zedboard sends. 

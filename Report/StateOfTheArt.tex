@@ -157,10 +157,16 @@ A trend in modern embedded systems is to take advantage of all the processing po
 Each industry field (automotive, aerospace, railway, etc) has certain safety and security regulations that the mixed criticality systems needs to comply with. There are several different criticality levels in each industry that depend on elements such as environment of operation and danger to human life\cite{zaki2016}. According to \cite{SIL} safety can be defined as the absence of unacceptable risk. A system is safe if the risk associated with the system is acceptable. 
 
 
-
 \subsection{Scheduling}
-Kort skriva om scheduling i allmänhet och i MCS. Sedan i implementation beskriva hur det är implementerad på emc2/zedboard
+Every task that is implemented has a worst-case execution time (WCET). This is the maximum amount of time that the task can take to execute on the hardware platform. The WCET is used for guaranteeing that the temporal constraints will not be violated.\\
 
+A scheduler can be either preemptive or non-preemptive which means that if the scheduler is preemptive, it can interrupt a task during execution if a task with higher priority is ready for execution. A non-preemptive scheduler will wait for the task to complete \cite{RTSS}.
 
-\section{Lateral Control}
-Pure pursuit-
+\subsubsection{Fixed Priority}
+Every task has a fixed priority assigned by the developer and the processor will execute the highest priority task of those that are ready to be executed. 
+\subsubsection{Earliest Deadline First}
+Earliest deadline first is a dynamic scheduling algorithm that always checks which task in the queue has the shortest time to its deadline and executes that task next.
+\subsubsection{Rate Monotonic}
+Rate-monotonic scheduling is an static priority scheduler where the priority of the tasks are assigned according to the task cycle time. The highest priority task will be the one with shortest cycle time and the lowest priority task will be the one with longest cycle time.
+\subsubsection{Deadline Monotonic}
+Deadline-monotonic priority is just like rate-monotonic a static priority scheduler with the difference that the priority is assigned according to deadline instead of cycle time. The task with the shortest deadline will be the one with highest priority.
