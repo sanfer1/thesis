@@ -1,9 +1,9 @@
 \chapter{Implementation}
 
 \section{EMC2 board specification}
+The emc2 board hardware consists of a Xilinx Zynq-7000 which consists of an dual-core ARM-Cortex-A9 processor as well as an programmable logic part (FPGA). 
 \section{Raspberry pi}
 This section will describe the single board computer that is used for lane detection in this degree project. The chosen board is a Raspberry Pi 3 which is a credit card sized computer. The third generation of the raspberry has seen some major hardware updates compared to earlier versions. The one used in this project has the following specifications:
-
 
 
 \begin{table}[H]
@@ -19,12 +19,17 @@ This section will describe the single board computer that is used for lane detec
 \end{table}
 
 
-
 The main computer in this project is the emc2 board and thus it would be preferred to utilize it for the lane detection as well. But due to no camera drivers available for the emc2 board it would be difficult to manage the image acquisition. A search for other hardware that is more suitable for the task was carried out and the raspberry pi was chosen due to that it is widely used in computer vision projects and its affordable price point.
 
-\subsection{Pi Camera}
-The pi camera module has been chosen as image acquisition device for this project. The camera module has a five megapixel image sensor and a maximum resolution of 2952 x 1944 pixels. This camera was chosen due the fact that it is made specifically for the raspberry pi and is very easy to use. The one used has a wide angel lens which maybe is not optimal??
+\begin{figure}[H]
+  \includegraphics[scale=0.3]{./img/rpi.jpg}
+  \centering
+  \caption{Raspberry Pi 3}
+  \label{fig:RPI}
+\end{figure}
 
+\subsection{Pi Camera}
+The pi camera module has been chosen as image acquisition device for this project. The camera module has a five megapixel image sensor and a maximum resolution of 2952 x 1944 pixels. This camera was chosen due the fact that it is made specifically for the raspberry pi and is very easy to use. The one used has a very wide angle lens which turned out to entail both advantages and disadvantages. The positive thing with a wide angle lens is the wide image that the camera can capture so it can see the road in almost all angles. The negative thing with the wide angle lens is that the image is quite warped at the edges, which makes the angle calculations less accurate. 
 
 
 
@@ -104,14 +109,21 @@ This thresholded image is used as an input to the Hough transform function that 
 
 The were a lot of problems when developing the algorithm in terms of false positives when evaluating the lines in the image. A solution was developed in order to eliminate the false lines in the image and only keep the the lines that are part of a road lane.\\
 
-The concept behind this lane detection algorithm solution is to group lines in the image that are very close to each other. So for instance if we find several lines on both the left and right lane of the road, these form two groups of lines because the lines are close to each other. If there are other lines in the image that are not very close to these two lanes, they will be put in a separate group. There can be multiple groups depending on how many false lines that are detected. In the end the groups are evaluated and the two groups with the most number of lines in them are the one that are regarded as lanes. This gives a very robust lane detection algorithm that disregards false positives from the hough transform. 
+The concept behind this lane detection algorithm solution is to group lines in the image that are very close to each other. So for instance if we find several lines on both the left and right lane of the road, these form two groups of lines because the lines are close to each other. If there are other lines in the image that are not very close to these two lanes, they will be put in a separate group. There can be multiple groups depending on how many false lines that are detected. In the end the groups are evaluated and the two groups with the most number of lines in them are the one that are regarded as lanes. This gives a very robust lane detection algorithm that disregards false positives from the hough transform.
+
+FALSE POSITIVE IMAGE
+
+What happens if a new line is introduced in the image that is not part of the road lanes?
+
+In the image below one extra line has been introduced and is detected by the system. But due to the concept of grouping lines and evaluating which ones are the most prominent, it is clear in this case that the system disregards from the new line and indicates the center and direction of the road correctly. 
+
 
 
 
 \section{Lateral control}
 Now the lines are detected and the vehicle need to be controled in some way using the information from the lane detection. So far all of these steps are all done on the Raspberry Pi thanks to its easy camera implementation and that it supports OpenCV.\\
 
-There are two errors that are calculated and from which the vehicle is controlled by. The positional error is calculated by splitting the image into two halves and making the assumption that we have one lane in each of the two halves. By measuring the distance to the line from the center of the image, the error is calculated as $error = xtot - xmid$\\
+There are two errors that are calculated and from which the vehicle is controlled by. The positional error is calculated by splitting the image into two halves and making the assumption that we have one lane in each of the two halves. By measuring the distance to the line from the center of the image, the error is calculated as $$error_{pos} = x\_mid\_camera - x\_mid\_center\_lane$$
 
 The other error used for control is the angle by which the vehicle is travelling forward compared to the angle of the road. This is calculated from the captured images and compared to the vehicles angle with the information from the system identification.\\
 
@@ -123,13 +135,19 @@ The other error used for control is the angle by which the vehicle is travelling
 \end{figure}
 
 
-In the captured images from the camera the angle of the centerline can be calculated using the known x and y values. The x in the picture is calculated as $$x = abs(x1-x2)$$ and y is calculated as $$y=abs(y1-y2)$$ and the angle is obtained using $$tan(\alpha)=\frac{y}{x}$$ and thus $$\alpha = arctan(\frac{y}{x})$$\\
+In the captured images from the camera the angle of the centerline can be calculated using the known x and y values. The x in the picture is calculated as $$x = abs(x1-x2)$$ and y is calculated as $$y=abs(y1-y2)$$ and the angle is obtained using $$tan(\alpha)=\frac{y}{x}$$ and thus $$\alpha = arctan(\frac{y}{x})$$
 
-The two errors are combined and then sent to the EMC2 board where the lateral control is scheduled and executed on the mixed criticality platform.\\
+This $\alpha$ angle is compared to the known angle from the system identification and an $error_{angle}$ is calculated
+
+$$error_{angle} = \alpha - (u*(-14.26)+195.96)$$
+
+
+The two errors are sent to the EMC2 board where the lateral control is scheduled and executed on the mixed criticality platform.\\
 
 A PID controller for the steering servo is developed using z transform.
 
-
+The output signal u to the steering servo is calculated as:
+$$u = \frac{PWM_{min}+PWM_{max}}{2} - a_{angle}*error_{angle} + a_{pos}*error_{pos}$$
 
 \section{Implementation and integration with zedboard}
 \subsection{Tasks}
