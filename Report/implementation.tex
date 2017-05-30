@@ -63,9 +63,7 @@ This is used in combination with the position control to eliminate the deviation
 
 
 \section{Lane detection algorithm}
-CHANGE ALL THREE PICTURES TO BETTER ONES\\
-
-This chapter will describe the algorithms used for lane detection that have been implemented on the demonstrator of this project. 
+This chapter will describe the algorithms used for lane detection that have been implemented on the demonstrator of this project.\\
 
 The algorithm that has been implemented on the demonstrator so far consist of the following steps:\\
 
@@ -73,25 +71,25 @@ The lane detection process starts with grabbing a frame from the pi camera and a
 
 The first step is to crop the image to only contain the region of interest (ROI). This is a camera setting that can be predefined so that the camera only grabs the ROI and thus not need to crop it after the frame is grabbed.\\
 
-INPUT IMAGE
-
-
-Following step is to convert the image to gray scale to prepare it for next coming operations. 
-
-
+The following step is to convert the image to gray scale to prepare it for next coming operations. Figure \ref{fig:Input image and grayscale} below shows how the acquired image looks in the first stages of the lane detection process.
 
 \begin{figure}[H]
-  \includegraphics[width=\textwidth]{./img/gray.png}
-  \centering
-  \caption{Input image converted to grayscale}
-  \label{fig:Input image converted to grayscale}
+  \begin{subfigure}[b]{0.50\textwidth}
+    \includegraphics[width=\textwidth]{./img/input22.png}
+    \caption{\label{fig:input image}Input image}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.50\textwidth}
+    \includegraphics[width=\textwidth]{./img/gray22.png}
+    \caption{\label{fig:gray image}Converted to grayscale}
+  \end{subfigure}
+  \caption{\label{fig:Input image and grayscale}Show how the input image looks before and after grayscale filter}
 \end{figure}
 
 
 The gray scale image is the input to the canny edge detection function. As described in the state of the art section the output of the canny function is a thresholded image where all the pixels that are part of edges are set to white and all pixels that are not part of edges are set black.
 
 \begin{figure}[H]
-  \includegraphics[width=\textwidth]{./img/edges.png}
+  \includegraphics[width=\textwidth]{./img/edges22.png}
   \centering
   \caption{Tresholded image using canny filter}
   \label{fig:Tresholded image using canny filter}
@@ -101,7 +99,7 @@ This thresholded image is used as an input to the Hough transform function that 
 
 
 \begin{figure}[H]
-  \includegraphics[width=\textwidth]{./img/detected_lines.png}
+  \includegraphics[width=\textwidth]{./img/detected.png}
   \centering
   \caption{Detected lines}
   \label{fig:Detected lines}
@@ -109,9 +107,11 @@ This thresholded image is used as an input to the Hough transform function that 
 
 The were a lot of problems when developing the algorithm in terms of false positives when evaluating the lines in the image. A solution was developed in order to eliminate the false lines in the image and only keep the the lines that are part of a road lane.\\
 
-The concept behind this lane detection algorithm solution is to group lines in the image that are very close to each other. So for instance if we find several lines on both the left and right lane of the road, these form two groups of lines because the lines are close to each other. If there are other lines in the image that are not very close to these two lanes, they will be put in a separate group. There can be multiple groups depending on how many false lines that are detected. In the end the groups are evaluated and the two groups with the most number of lines in them are the one that are regarded as lanes. This gives a very robust lane detection algorithm that disregards false positives from the hough transform.
+The concept behind this lane detection algorithm solution is to group lines in the image that are very close to each other. So for instance if we find several lines on both the left and right lane of the road, these form two groups of lines because the lines are close to each other. If there are other lines in the image that are not very close to these two lanes, they will be put in a separate group. There can be multiple groups depending on how many false lines that are detected. In the end the groups are evaluated and the two groups with the most number of lines in them are the one that are regarded as lanes. The short red horizontal line visible in \ref{fig:Detected lines} is the threshold distance for lines to be grouped in the same group.\\
 
-FALSE POSITIVE IMAGE
+This gives a very robust lane detection algorithm that disregards false positives from the hough transform.\\
+
+INSERT FALSE POSITIVE IMAGE
 
 What happens if a new line is introduced in the image that is not part of the road lanes?
 
