@@ -1,28 +1,35 @@
-\chapter{State of the Art}
-This chapter will present the literature study that has been carried out. This chapter includes sections about
-lane detection in general and what modalities are the most frequently used. Image processing including edge detection and hough transform. MCS. Information about the board  (EMC2 and zedboard).
+\chapter{Literature review}
+This chapter will present the literature study that has been carried out and presenting the different topics to the reader.
+
+
+%This chapter includes sections about lane detection in general and what modalities are the most frequently used. Image processing including edge detection and hough transform. MCS. Information about the board  (EMC2 and zedboard).
 
 \section{SAE Level}
-When talking about Advanced Driver Assistance Systems (ADAS) and autonomous vehicles it is important to define what it actually means. SAE International is a professional association and standards developing organization for transport industries. They have developed a new standard for autonomous driving called  "J3016: Taxonomy and Definitions for Terms Related to On-Road Motor Vehicle Automated Driving Systems,”. This standard defines six levels of driving automation, from no automation to full automation. \cite{SAE} \cite{SAEweb}. 
-
-
+When talking about Advanced Driver Assistance Systems (ADAS) and autonomous vehicles it is important to define what it actually means. SAE International is a professional association and standards developing organization for transport industries. They have developed a new standard for autonomous driving called  "J3016: Taxonomy and Definitions for Terms Related to On-Road Motor Vehicle Automated Driving Systems,”. This standard defines six levels of driving automation, from no automation to full automation and is described more in detail in table \ref{SAE2} below \cite{SAE} \cite{SAEweb}. 
 
 
 \begin{table}[H]
 \centering
-\caption{SAE Levels}
-\label{SAE Levels}
-\begin{tabular}{|l|l|l|ll}
-\cline{1-3}
- \textbf{Level} & \textbf{Name} & \textbf{Description}	\\
-\cline{1-3}\hline
- 0	& No Automation & The human does all the work\\ \cline{1-3}\hline
- 1  & Driver Assistance & \pbox{7cm}{The vehicle help out by doing a single task. One example is a cruise control where the car holds a reference speed}\\ \cline{1-3}\hline
- 2  & Partial Automation & \pbox{7cm}{The vehicle can help the driver with certain things like maintaining speed, keeping within the lanes, avoiding collisions with other vehicles. Ultimately the driver is responsible and need to be prepared for taking over the control}\\ \cline{1-3}
- 3  & Conditional Automation & \pbox{7cm}{The first level that is considered as an automated driving system. In this level the vehicle is able to make decisions as overtaking other vehicles and navigating. In this level humans are only the fall-back option if something fails the vehicle will request the human to intervene }\\ \cline{1-3}
- 4	& High Automation & \pbox{7cm}{In level 4, the vehicle is able to operate entirely by it self for the first time, there does not need to be any human behind the wheel as a fall-back. What differs this level from full automation is that it is on a geographically limited area like a center of a town, company area or college campus. }\\ \cline{1-3}
- 5	& Full Automation & \pbox{7cm}{Level 5 is where full automated driving is reached. The vehicle can handle all operating modes. There is no steering wheel nor pedals. Just let the vehicle know where you want to go.}\\ \cline{1-3}
-\end{tabular}
+\caption{SAE levels description}
+\label{SAE2}
+\begin{tabular}{@{} lll}
+\toprule
+\textbf{Level} & \textbf{Name} & \textbf{Description}  \\
+\midrule
+\\[-1em]
+ 0 & No Automation & The human does all the work \\
+ \\[-1em]
+\rowcolor{black!15} 1 & Driver Assistance & \pbox{7cm}{The vehicle help out by doing a single task. One example is a cruise control where the car holds a reference speed} \\
+\\[-1em]
+ 2 & Partial Automation & \pbox{7cm}{The first level that is considered as an automated driving system. In this level the vehicle is able to make decisions as overtaking other vehicles and navigating. In this level humans are only the fall-back option if something fails the vehicle will request the human to intervene } \\
+ \\[-1em]
+ \rowcolor{black!15} 3 & Conditional Automation & \pbox{7cm}{The first level that is considered as an automated driving system. In this level the vehicle is able to make decisions as overtaking other vehicles and navigating. In this level humans are only the fall-back option if something fails the vehicle will request the human to intervene} \\
+ \\[-1em]
+ 4 & High Automation & \pbox{7cm}{In level 4, the vehicle is able to operate entirely by it self for the first time, there does not need to be any human behind the wheel as a fall-back. What differs this level from full automation is that it is on a geographically limited area like a center of a town, company area or college campus. } \\
+ \\[-1em]
+ \rowcolor{black!15} 5 & Full Automation & \pbox{7cm}{Level 5 is where full automated driving is reached. The vehicle can handle all operating modes. There is no steering wheel nor pedals. Just let the vehicle know where you want to go.} \\
+\bottomrule
+ \end{tabular}
 \end{table}
 
 
@@ -45,10 +52,15 @@ But the impression that the problem is easy is misleading and building a useful 
 At 15 frames per second, 1 false alarm per hour means only one error in 54,000 frames.\\
 
 
-One factor that makes ADAS hard to implement on large scale is the large amount of different conditions that has to be taken care of. The main sources for condition diversity are:\\
--Lane and road appearance\\
--image clarity issues\\
--poor visibility conditions\\
+One factor that makes ADAS hard to implement on large scale is the large amount of different conditions that has to be taken care of. The main sources for condition diversity are:
+\begin{itemize}  
+\item lane and road appearance
+\item image clarity issues
+\item poor visibility conditions
+\end{itemize}
+
+
+When driving on freeways or large highways the road scene appearance diversity is minimized which makes it easier to implement lane detection functions and ultimately automated driving. This is one of the reasons why long haul trucks are the focus of a large portion of the research concering autonomous driving. 
 
 \subsection{Modalities for environment perception}
 In this section the modalities used for road and lane detection will be described more in detail. 
@@ -73,10 +85,10 @@ LIDAR sensors can perform well in certain situations for example in rural areas 
 Stereo imaging is the use of two cameras instead of one camera in order to obtain 3D information about the surrounding. It is a step in between the monocular vision and the LIDAR as it is much cheaper to implement than LIDAR but generally performs less good in terms of accuracy and reliability.  Also the stereo imaging system generally requires greater processing power and is more prone to errors compared to LIDAR. 
 
 
-\subsubsection{GIS, GPS, IMU}
-Geographical information system (GPS) is currently widely used for navigation systems. Using GPS it is possible to know the vehicle position within XX accuracy. 
-
-One problem with GPS is the reliability. GPS requires connection with enough satellites to function properly and that connection can be lost due to many reasons. Some level of lost connection can be tolerated by using inertial measurement unit (IMU) intergration to calculate current position. 
+\subsubsection{GPS, IMU}
+Geographical information system (GPS) is currently widely used for navigation systems. According to \cite{wing2011} current commericial consumer grade GPS recievers can achieve an accuracy of 1.5-5 m. Which works sufficiently for map navigation when a human drives the vehicle but is simply not accurate enough to fully control a vehicle only based upon the GPS. Also the GPS does not give any information about the environment, e.g. other vehicles or pedestrians. This means that GPS will always need to be supplemented by a camera or LIDAR.\\
+ 
+One problem with GPS is the reliability. GPS requires connection with enough satellites to function properly and that connection can be lost due to many reasons. Some level of lost connection can be tolerated by using inertial measurement unit (IMU). With the IMU it is possible to calculate current position and integrate with the GPS to get a more reliable estimation when the connection to sattelites is weak.
 
 
 
@@ -85,7 +97,7 @@ One problem with GPS is the reliability. GPS requires connection with enough sat
 \begin{figure}[H]
   \includegraphics[width=\textwidth]{./img/flow.png}
   \centering
-  \caption{Flow chart of a general lane detection system}
+  \caption{Flowchart of a general lane detection system}
   \label{fig:Software architecture of the EMC2 platform}
 \end{figure}
 
@@ -95,30 +107,24 @@ The majority of lane detection system initially propose a model of a road. This 
 \subsection{Image acquisition}
 The image acquisition typically comes from a camera that is mounted in the center of the vehicle.
 \subsection{Preprocess}
-The preprocess is a step where the image is prepared for the next steps in terms of image resolution, where a lower image resolution is often preferred due to the high computational load that high resolution images bring \cite{Yenikaya:2013:KVR:2522968.2522970}. Everything that is not part of the Region of interest (ROI) is often removed. This typically means removing the region above the horizon. Often gray-scale images are preferred over color images due to reduced data load \cite{Yenikaya:2013:KVR:2522968.2522970}. Removal of unwanted disturbances such as shadows are often done in the preprocess. 
-
-
-Inverse Perspective mapping- Get rid of the perspective effect. 
+The preprocess is a step where the image is prepared for the next steps in terms of image resolution, where a lower image resolution is often preferred due to the high computational load that high resolution images bring \cite{Yenikaya:2013:KVR:2522968.2522970}. Everything that is not part of the Region of interest (ROI) is often removed. This typically means removing the region above the horizon. Often gray-scale images are preferred over color images due to reduced data load \cite{Yenikaya:2013:KVR:2522968.2522970}. Removal of unwanted disturbances such as shadows are often done in the preprocess. As mentioned in the section about road models, inverse perspective mapping is commonly done in the image preprocess to get rid of the perspective effect \cite{bertozzi1998gold}.
 
 \subsection{Feature Extraction}
 There are several features that can be use for road and lane detection. The most typically used are color, texture and edges.
 
 For structured roads with clear line markings the edges are the most common feature used for lane detection. An edge is defined as the gradient of the intensity function \cite{Yenikaya:2013:KVR:2522968.2522970}. The output of an edge based method are candidates for lane boundaries, since edge based methods are able to find where the image brightness changes sharply. There are some well known edge detection methods (Prewitt, Roberts, Sobel), but one method called Canny edge detector stands out and is still, 30 years after it was first developed, considered a state-of-the-art edge detector, some even mean that it is an optimal edge detector algorithm \cite{bhadauria2013comparison}. A general process of operations that occur in the canny edge detector starts with applying a gaussian filter to smooth the image in order to remove noise. The next step is to scan the image for intensity gradients with a gradient operator and then apply a filter to supress noise but keep edges in the image. Then the image is analyzed for non-maxima points to further remove pixels that are not actual edges in the image. Next step is to treshold the image and lastly finalize the detection of edges by a hysteresis treshold which supresses all the weak edges that are not connected to other edges.\\
 
-Hough transform (HT) is then applied to the image in order to determine if there is an edge at one certain pixel or not. The Hough transform was originally invented 1962 and has since that been refined to the way it is universally used today. The HT works by converting the white pixels from the thresholded input image to points in the parameter coordinate space, meaning they will be represented using a direction theta and distance r instead of x an y.
+Hough transform (HT) is then applied to the image in order to determine if there is an edge at one certain pixel or not. The Hough transform was originally invented 1962 and has since that been refined to the way it is universally used today. The HT works by converting the white pixels from the thresholded input image to points in the parameter coordinate space, meaning they will be represented using a direction theta and distance r instead of x an y.\\
 
 Each point in the parameter space has a count, and each point in the image space has a vote. Edge pixels with the same theta and r value are assumed to define a line in the image. To compute the frequency of each line theta and r are put in a number of so called bins.  When all the edge pixels have been converted to parameter space these bins can be analyzed and the ones with the most amount of votes are the most prominent lines in the image. Usually a threshold is set where counts that does not exceed the threshold are ignored and only the most prominent lines are accepted \cite{davies}.
 
 
 \subsection{Model Fitting}
-As mentioned in the road model section, very often a road model is used and fitted to the observed information from the feature extraction section. 
+As mentioned in the road model section, very often a road model is used and fitted to the observed information from the feature extraction section.\\
 
-The extracted data from the previous step would typically contain both inliers, i.e. data that can be fitted to a line, and outliers, i.e. data that cannot be fitted onto the same line. \cite{raguram2008comparative}
+The extracted data from the previous step would typically contain both inliers, i.e. data that can be fitted to a line, and outliers, i.e. data that cannot be fitted onto the same line \cite{raguram2008comparative}. Assuming that the extracted data from previous steps contains data that can be fitted to one of the models chosen initially, several different approaches have been proposed for model fitting \cite{BarHillel2014}. Some researchers use least squares method, which is a mathematical procedure to fit a set of observed values to a function. The idea behind the method is to construct a function in such way so the sum of the difference between the observed value and the data points is minimized \cite{LS}.\\
 
-Assuming that the extracted data from previous steps contains data that can be fitted to one of the models chosen initially, several different approaches have been proposed for model fitting \cite{BarHillel2014} 
-Some researchers use least squares method, which is a 
-
-Other research propose the use of "RANdom SAmple Consensus", known as the RANSAC algorithm \cite{huang2009finding}\cite{aly2008real} \cite{li2013lane}. This method is stated to be superior to least squares method due to its ability to fit a line to the inliers only, without any influence of the outliers on the result.  
+Other research propose the use of "RANdom SAmple Consensus", known as the RANSAC algorithm \cite{huang2009finding}\cite{aly2008real} \cite{li2013lane}. This method is stated to be superior to least squares method due to its ability to fit a line to the inliers only, without any influence of the outliers on the result. The disadvantage with this method is that the computational time usually is longer compared to least squares method and is very dependent on the amount of outliers in the image \cite{RANSAC}.
 
 
 \subsection{Time Integration}

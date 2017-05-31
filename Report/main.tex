@@ -27,13 +27,18 @@
 \usepackage{pbox}
 \usepackage{subcaption}
 \usepackage{booktabs}
+\usepackage{xcolor,colortbl}
+\usepackage{fancyhdr}
 
 
 %\usepackage[numbers]{natbib}
 \bibliographystyle{plain}
 \usepackage{cite}
+\definecolor{LightCyan}{rgb}{0.78,0.95,1}
 
-
+\pagestyle{fancy}
+\fancyhead[LE,RO]{\itshape \nouppercase \rightmark}
+\fancyhead[LO,RE]{\itshape \nouppercase Chapter \arabic{chapter}}
 \setlength\parindent{0pt}
 
 \title{\huge{Comparative study on road and lane detection in mixed criticality embedded systems} \\\large{~\\Evaluation of performance on the emc2 platform \\~\\ Master Thesis \\ Royal Institute of Technology \\ Stockholm, Sweden}}

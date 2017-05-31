@@ -1,5 +1,7 @@
 \chapter{Implementation}
+This chapter will present the implementation phase of the thesis project and explain the main concepts in the implementation.\\
 
+The literature rewiev provided good insight in the subject of lane detection systems and paved the way for starting the implementation phase of the project. However, one important issue was brought up  regarding the image acquisition on the emc2 board due to lack of camera drivers. A decision to use a separate node for the image processing part was made and is described more in detail in this section.
 \section{EMC2 board specification}
 The emc2 board hardware consists of a Xilinx Zynq-7000 which consists of an dual-core ARM-Cortex-A9 processor as well as an programmable logic part (FPGA). 
 \section{Raspberry pi}
@@ -82,7 +84,7 @@ The following step is to convert the image to gray scale to prepare it for next 
     \includegraphics[width=\textwidth]{./img/gray22.png}
     \caption{\label{fig:gray image}Converted to grayscale}
   \end{subfigure}
-  \caption{\label{fig:Input image and grayscale}Show how the input image looks before and after grayscale filter}
+  \caption{\label{fig:Input image and grayscale}Input image before and after grayscale filter}
 \end{figure}
 
 
@@ -130,7 +132,7 @@ The other error used for control is the angle by which the vehicle is travelling
 \begin{figure}[H]
   \includegraphics[scale=0.25]{./img/angle.JPG}
   \centering
-  \caption{angle}
+  \caption{Angle calculation}
   \label{fig:angle}
 \end{figure}
 
@@ -156,7 +158,7 @@ As shown in figure \ref{fig:sequence diagram} there are currently three tasks sc
 \begin{figure}[H]
   \includegraphics[width=\textwidth]{./img/sekvensdiagram.png}
   \centering
-  \caption{sequence diagram}
+  \caption{Sequence diagram}
   \label{fig:sequence diagram}
 \end{figure}
 The tasks implemented on the board are described below.
