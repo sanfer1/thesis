@@ -30,15 +30,15 @@ The main computer in this project is the emc2 board and thus it would be preferr
   \label{fig:RPI}
 \end{figure}
 
-\subsection{Pi Camera}
-The pi camera module has been chosen as image acquisition device for this project. The camera module has a five megapixel image sensor and a maximum resolution of 2952 x 1944 pixels. This camera was chosen due the fact that it is made specifically for the raspberry pi and is very easy to use. The one used has a very wide angle lens which turned out to entail both advantages and disadvantages. The positive thing with a wide angle lens is the wide image that the camera can capture so it can see the road in almost all angles. The negative thing with the wide angle lens is that the image is quite warped at the edges, which makes the angle calculations less accurate. 
+\subsection{Pi camera}
+The Raspberry Pi camera module has been chosen as image acquisition device for this project. The camera module has a five megapixel image sensor and a maximum resolution of 2952 x 1944 pixels. This camera was chosen due the fact that it is made specifically for the raspberry pi and is very easy to use. The one used has a very wide angle lens which turned out to entail both advantages and disadvantages. The positive thing with a wide angle lens is the wide image that the camera can capture so it can see the road in almost all angles. The negative thing with the wide angle lens is that the image is quite warped at the edges, which makes the angle calculations less accurate. 
 
 
 
 \includepdf[scale=0.8,pages=1,pagecommand=\section{System architecture}]{./img/architecture.pdf}
 
 
-\section{System Identification}
+\section{System identification}
 To know how the system will behave when being fed with different PWM values an experimental setup has been developed and many (136) different PWM inputs and steering angle outputs have been measured.
 
 
@@ -144,7 +144,7 @@ This $\alpha$ angle is compared to the known angle from the system identificatio
 $$error_{angle} = \alpha - (u*(-14.26)+195.96)$$
 
 
-The two errors are sent to the EMC2 board where the lateral control is scheduled and executed on the mixed criticality platform.\\
+The two errors are sent to the EMC2 board via serial communication where the lateral control is scheduled and executed on the mixed criticality platform.\\
 
 A PID controller for the steering servo is developed using z transform.
 
@@ -165,14 +165,14 @@ The tasks implemented on the board are described below.
  
 \subsubsection{Communication}
 In this task all the vehicle-to-vehicle (V2V) communication and vehicle-to-infrastructure (V2I) communication is done. The information that is sent is:
-\subsubsection{Lateral Control}
+\subsubsection{Lateral control}
 In this task the lateral control described earlier is executed
-\subsubsection{Longitudinal Control} 
+\subsubsection{Longitudinal control} 
  
  
 There will eventually be more tasks implemented including one task to switch to the non-critical operating system.
 
-\subsection{Criticality}
+\subsection{Priority}
 All the task are scheduled with fixed priority. The prority of the tasks are:
 
 
@@ -186,4 +186,4 @@ All the task are scheduled with fixed priority. The prority of the tasks are:
 
 
 \subsection{Timing requirements}
-WCET for the lateral control task is calculated as the end-to-end time which starts from the image acquisition in the raspberry pi, to the controlsigral that the zedboard sends. 
+WCET for the lateral control task is calculated as the end-to-end time which starts from the image acquisition in the raspberry pi, to the control signal that the emc2 sends. 

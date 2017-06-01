@@ -4,7 +4,7 @@ This chapter will present the literature study that has been carried out and pre
 
 %This chapter includes sections about lane detection in general and what modalities are the most frequently used. Image processing including edge detection and hough transform. MCS. Information about the board  (EMC2 and zedboard).
 
-\section{SAE Level}
+\section{SAE level}
 When talking about Advanced Driver Assistance Systems (ADAS) and autonomous vehicles it is important to define what it actually means. SAE International is a professional association and standards developing organization for transport industries. They have developed a new standard for autonomous driving called  "J3016: Taxonomy and Definitions for Terms Related to On-Road Motor Vehicle Automated Driving Systems,”. This standard defines six levels of driving automation, from no automation to full automation and is described more in detail in table \ref{SAE2} below \cite{SAE} \cite{SAEweb}. 
 
 
@@ -109,17 +109,15 @@ The image acquisition typically comes from a camera that is mounted in the cente
 \subsection{Preprocess}
 The preprocess is a step where the image is prepared for the next steps in terms of image resolution, where a lower image resolution is often preferred due to the high computational load that high resolution images bring \cite{Yenikaya:2013:KVR:2522968.2522970}. Everything that is not part of the Region of interest (ROI) is often removed. This typically means removing the region above the horizon. Often gray-scale images are preferred over color images due to reduced data load \cite{Yenikaya:2013:KVR:2522968.2522970}. Removal of unwanted disturbances such as shadows are often done in the preprocess. As mentioned in the section about road models, inverse perspective mapping is commonly done in the image preprocess to get rid of the perspective effect \cite{bertozzi1998gold}.
 
-\subsection{Feature Extraction}
-There are several features that can be use for road and lane detection. The most typically used are color, texture and edges.
-
-For structured roads with clear line markings the edges are the most common feature used for lane detection. An edge is defined as the gradient of the intensity function \cite{Yenikaya:2013:KVR:2522968.2522970}. The output of an edge based method are candidates for lane boundaries, since edge based methods are able to find where the image brightness changes sharply. There are some well known edge detection methods (Prewitt, Roberts, Sobel), but one method called Canny edge detector stands out and is still, 30 years after it was first developed, considered a state-of-the-art edge detector, some even mean that it is an optimal edge detector algorithm \cite{bhadauria2013comparison}. A general process of operations that occur in the canny edge detector starts with applying a gaussian filter to smooth the image in order to remove noise. The next step is to scan the image for intensity gradients with a gradient operator and then apply a filter to supress noise but keep edges in the image. Then the image is analyzed for non-maxima points to further remove pixels that are not actual edges in the image. Next step is to treshold the image and lastly finalize the detection of edges by a hysteresis treshold which supresses all the weak edges that are not connected to other edges.\\
+\subsection{Feature extraction}
+There are several features that can be use for road and lane detection. The most typically used are color, texture and edges. For structured roads with clear line markings the edges are the most common feature used for lane detection. An edge is defined as the gradient of the intensity function \cite{Yenikaya:2013:KVR:2522968.2522970}. The output of an edge based method are candidates for lane boundaries, since edge based methods are able to find where the image brightness changes sharply. There are some well known edge detection methods (Prewitt, Roberts, Sobel), but one method called Canny edge detector stands out and is still, 30 years after it was first developed, considered a state-of-the-art edge detector, some even mean that it is an optimal edge detector algorithm \cite{bhadauria2013comparison}. A general process of operations that occur in the canny edge detector starts with applying a gaussian filter to smooth the image in order to remove noise. The next step is to scan the image for intensity gradients with a gradient operator and then apply a filter to supress noise but keep edges in the image. Then the image is analyzed for non-maxima points to further remove pixels that are not actual edges in the image. Next step is to treshold the image and lastly finalize the detection of edges by a hysteresis treshold which supresses all the weak edges that are not connected to other edges.\\
 
 Hough transform (HT) is then applied to the image in order to determine if there is an edge at one certain pixel or not. The Hough transform was originally invented 1962 and has since that been refined to the way it is universally used today. The HT works by converting the white pixels from the thresholded input image to points in the parameter coordinate space, meaning they will be represented using a direction theta and distance r instead of x an y.\\
 
 Each point in the parameter space has a count, and each point in the image space has a vote. Edge pixels with the same theta and r value are assumed to define a line in the image. To compute the frequency of each line theta and r are put in a number of so called bins.  When all the edge pixels have been converted to parameter space these bins can be analyzed and the ones with the most amount of votes are the most prominent lines in the image. Usually a threshold is set where counts that does not exceed the threshold are ignored and only the most prominent lines are accepted \cite{davies}.
 
 
-\subsection{Model Fitting}
+\subsection{Model fitting}
 As mentioned in the road model section, very often a road model is used and fitted to the observed information from the feature extraction section.\\
 
 The extracted data from the previous step would typically contain both inliers, i.e. data that can be fitted to a line, and outliers, i.e. data that cannot be fitted onto the same line \cite{raguram2008comparative}. Assuming that the extracted data from previous steps contains data that can be fitted to one of the models chosen initially, several different approaches have been proposed for model fitting \cite{BarHillel2014}. Some researchers use least squares method, which is a mathematical procedure to fit a set of observed values to a function. The idea behind the method is to construct a function in such way so the sum of the difference between the observed value and the data points is minimized \cite{LS}.\\
@@ -127,7 +125,7 @@ The extracted data from the previous step would typically contain both inliers, 
 Other research propose the use of "RANdom SAmple Consensus", known as the RANSAC algorithm \cite{huang2009finding}\cite{aly2008real} \cite{li2013lane}. This method is stated to be superior to least squares method due to its ability to fit a line to the inliers only, without any influence of the outliers on the result. The disadvantage with this method is that the computational time usually is longer compared to least squares method and is very dependent on the amount of outliers in the image \cite{RANSAC}.
 
 
-\subsection{Time Integration}
+\subsection{Time integration}
 The last step that is important for a reliable lane detection system is to be able to incorporate some knowledge from previous frames. This is done in order to increase the reliability of the system and decrease the computational load.
 
 
@@ -157,7 +155,7 @@ OpenCV is an open source computer vision and machine learning software library. 
 
 In this project several OpenCV funtions have been utilized mainly in the image processing part. More information about how it is implemented come s in next section \cite{opencv}
 
-\section{Mixed-criticality Systems}
+\section{Mixed-criticality systems}
 A trend in modern embedded systems is to take advantage of all the processing power available in a multicore processor chip. This can be done by combining different subsystems onto one chip it is possible to  achieve higher CPU utilization and thus reduce hardware cost and power consumption. Oftentimes these embedded systems contain components of different criticality. For the automotive industry that this thesis focuses on one example could be to run the ADAS and the infotainment system of the vehicle on the same electric control unit (ECU). If these two components are integrated onto a single hardware platform, the response time of the ADAS system should not be affected of the infotainment system. By scheduling these two components onto the same computing platform one creates a mixed-criticality system.\\
 
 Each industry field (automotive, aerospace, railway, etc) has certain safety and security regulations that the mixed criticality systems needs to comply with. There are several different criticality levels in each industry that depend on elements such as environment of operation and danger to human life\cite{zaki2016}. According to \cite{SIL} safety can be defined as the absence of unacceptable risk. A system is safe if the risk associated with the system is acceptable. 

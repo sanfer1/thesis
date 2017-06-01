@@ -1,2 +1,8 @@
 \chapter{Future work}
-This chapter will contain thoughts and ideas for future work building on this thesis.
+This chapter will contain thoughts and ideas for future work building on this thesis.\\
+
+One of the main and the obvious direction that this project should proceed in is to integrate the whole lane detection system in the emc2 platform to get one uniform system. This would not guarantee a better system though, as the image processing part is most computation heavy part of the lane detection system and is now done in parallel to the tasks running on the emc2 board.\\
+
+One thing that could potentially improve the performance of the vehicles ability to keep within the lane in higher speeds is to change the camera to one that distorts the image to a lesser amount.\\
+
+As mentioned in the discussion section when evaluating the lane keeping system it was clear that the curves were the problem and that the car had no prblems to keep within the lane on straight parts of the track. One reason is that the speed of the car was constant with no regard to if there is a curve or a straight part of the track. This parameter would be very interesting to integrate into the demo, e.g. the speed of the vehicle should be dependent on the error from the centerline.
