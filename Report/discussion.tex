@@ -1,12 +1,15 @@
 \chapter{Discussion}
+In this section the results produced during this theis project will be discussed.
+\section{Demonstrator}
 First and foremost the performance of the lane keeping system on the demonstator vehicle can be discussed. It works very good in low speeds and keeps the vehicle within the lanes without much oscillation around the center line. The problems arises when the speed of the vehicle rises and naturally the curves are the part of the road where the vehicle starts having problems and cannot fully keep within the lanes. The demo vehicle drives in a constant speed with no regards to if there is a sharp curve ahead or not. A human driver would naturally slow down before the curve and speed up again after. It would be interesting to integrate the speed of the vehicle as a parameter in the lateral control. The correlation should be that when the angle of the centerline increases, the speed of the vehicle should decrease. \\
 
-
+\section{Lane keeping system}
 The method of the lane keeping system that is implemented can be improved and developed to include even more of the functinalities of the state of the art lane detection systems described in the literature review. It has been proven \cite{zaki2016} on the mixed criticality platform that non-critical components do not disturb or interfere with critical ones.\\
 
+\section{Camera input}
 One thing that has been tricky is the widel angle lens of the Raspberry Pi camera. The lens is convex which results in a distorted image at the edges. The effect is called barrel distorion and more commoly fisheye lens in cameras. This makes the angle calculations from the aquired images less accurate. The decision to use the wide angle lens camera has advantages also. One of the most important advantage and the deciding factor to use it is that the camera on the demo vehicle is mounted close to the ground, and reqires a wide vision to be able to see the the lanes of the road.\\
 
-
+\section{Research questions}
 
 \begin{enumerate}  
 \item How can we guarantee the performance of the lane detection system?
