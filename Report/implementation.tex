@@ -131,12 +131,16 @@ The concept behind this lane detection algorithm solution is to group lines in t
 
 This gives a very robust lane detection algorithm that disregards false positives from the hough transform.\\
 
-INSERT FALSE POSITIVE IMAGE
-
 What happens if a new line is introduced in the image that is not part of the road lanes?
 
-In the image below one extra line has been introduced and is detected by the system. But due to the concept of grouping lines and evaluating which ones are the most prominent, it is clear in this case that the system disregards from the new line and indicates the center and direction of the road correctly. 
+\begin{figure}[H]
+  \includegraphics[width=\textwidth]{./img/falsepositive.png}
+  \centering
+  \caption{False positive line}
+  \label{fig:angle}
+\end{figure}
 
+In the image above one extra line has been introduced and is detected by the system. But due to the concept of grouping lines and evaluating which ones are the most prominent, it is clear in this case that the system disregards from the new line and indicates the center and direction of the road correctly. 
 
 
 
