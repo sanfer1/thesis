@@ -35,7 +35,7 @@ When talking about Advanced Driver Assistance Systems (ADAS) and autonomous vehi
 
 When developing automated vehicles there are many functional safety requirements that must be fully verified and validated. One importance area is the vehicle actuation systems which are totally controlled by electronic systems. As the actuators are controlled by electronic systems they are strongly linked to other so called by-wire systems. Two examples are drive-by-wire and brake-by-wire. These systems do not have any mechanical coupling between the different elements but instead utilize sensors that read position of the brake pedal or steering wheel. In the development of these systems aspects as redundancy of the ECUs, sensors, actuators and power supply is required \cite{stolte2016safety}. 	The standard ISO 26262 is the most recent standard available concerning functional safety of electrical systems in the automotive industry. The standard requires determination of safety goals as part of hazard analysis and risk assessment. Once all the safety goals are defined, then functional safety requirements can be formulated.\\
 
-According to \cite{stolte2016safety} it is needed to adopt measures that go beyond the state-of-the-art of modern production vehicles for ensuring functional safety of automated vehicles. The authors point out that despite the importance of series deployment of automated vehicles, there is not much discussion about safety requirements within the ITS community.  
+According to Stolte \cite{stolte2016safety} it is needed to adopt measures that go beyond the state-of-the-art of modern production vehicles for ensuring functional safety of automated vehicles. The authors point out that despite the importance of series deployment of automated vehicles, there is not much discussion about safety requirements within the ITS community.  
 
 
 \section{Lane keeping}
@@ -55,7 +55,6 @@ One factor that makes ADAS hard to implement on large scale is the large amount 
 \item image clarity issues
 \item poor visibility conditions
 \end{itemize}
-
 
 When driving on freeways or large highways the road scene appearance diversity is minimized which makes it easier to implement lane detection functions and ultimately automated driving. This is one of the reasons why long haul trucks are the focus of a large portion of the research concering autonomous driving. 
 
@@ -81,7 +80,7 @@ Stereo imaging is the use of two cameras instead of one camera in order to obtai
 
 
 \subsubsection{GPS, IMU}
-Geographical information system (GPS) is currently widely used for navigation systems. According to \cite{wing2011} current commericial consumer grade GPS recievers can achieve an accuracy of 1.5-5 m. Which works sufficiently for map navigation when a human drives the vehicle but is simply not accurate enough to fully control a vehicle only based upon the GPS. Also the GPS does not give any information about the environment, e.g. other vehicles or pedestrians. This means that GPS will always need to be supplemented by a camera or LIDAR.\\
+Geographical information system (GPS) is currently widely used for navigation systems. According to Wing \cite{wing2011} current commericial consumer grade GPS recievers can achieve an accuracy of 1.5-5 m. Which works sufficiently for map navigation when a human drives the vehicle but is simply not accurate enough to fully control a vehicle only based upon the GPS. Also the GPS does not give any information about the environment, e.g. other vehicles or pedestrians. This means that GPS will always need to be supplemented by a camera or LIDAR.\\
  
 One problem with GPS is the reliability. GPS requires connection with enough satellites to function properly and that connection can be lost due to many reasons. Some level of lost connection can be tolerated by using inertial measurement unit (IMU). With the IMU it is possible to calculate current position and integrate with the GPS to get a more reliable estimation when the connection to satellites is weak.
 
@@ -144,14 +143,14 @@ One effort to reduce the distance between the vehicles in the platoon while main
 
 
 \section{OpenCV}
-OpenCV is an open source computer vision and machine learning software library. The library has a large amount of optimized algorithms for computer vision. A few areas where OpenCV is used are face recognition, object detection, tracking of moving objects and lane detection. Because OpenCV is a BSD-licensed product, it is free to both utilize and modify the code by companies all over the world. Companies like Google, Microsoft, Intel, Honda and Toyota employ the library for use in various different applications. OpenCV has C++, C, Python, Java and Matlab interfaces and supports all the major operating systems.\\
+OpenCV is an open source computer vision and machine learning software library. The library has a large amount of optimized algorithms for computer vision. A few areas where OpenCV is used are face recognition, object detection, tracking of moving objects and lane detection. Because OpenCV is a BSD-licensed product, it is free to both utilize and modify the code by companies all over the world. Companies like Google, Microsoft, Intel, Honda and Toyota employ the library for use in various different applications. OpenCV has C++, C, Python, Java and Matlab interfaces and supports all the major operating systems \cite{opencv}.\\
 
-In this project several OpenCV funtions have been utilized mainly in the image processing part. More information about how it is implemented comes in next section \cite{opencv}.
+In this project several OpenCV funtions have been utilized mainly in the image processing part. More information about how it is implemented comes in next section.
 
 \section{Mixed-criticality systems}
 A trend in modern embedded systems is to take advantage of all the processing power available in a multicore processor chip. This can be done by combining different subsystems onto one chip which makes it possible to achieve higher CPU utilization and thus reduce hardware cost and power consumption. Sometimes these embedded systems contain components of different criticality. For the automotive industry that this thesis focuses on one example could be to run the ADAS and the infotainment system of the vehicle on the same electric control unit (ECU). If these two components are integrated onto a single hardware platform, the response time of the ADAS system should not be affected of the infotainment system. By scheduling these two components onto the same computing platform one creates a mixed-criticality system.\\
 
-Each industry field (automotive, aerospace, railway, etc) has certain safety and security regulations that the mixed criticality systems needs to comply with. There are several different criticality levels in each industry that depend on elements such as environment of operation and danger to human life\cite{zaki2016}. According to \cite{SIL}, safety can be defined as the absence of unacceptable risk. A system is safe if the risk associated with the system is acceptable. 
+Each industry field (automotive, aerospace, railway, etc) has certain safety and security regulations that the mixed criticality systems needs to comply with. There are several different criticality levels in each industry that depend on elements such as environment of operation and danger to human life\cite{zaki2016}. According to Thane \cite{SIL}, safety can be defined as the absence of unacceptable risk. A system is safe if the risk associated with the system is acceptable. 
 
 
 \subsection{Scheduling}

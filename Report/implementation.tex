@@ -2,7 +2,7 @@
 This chapter will present the implementation phase of the thesis project and explain the main concepts in the implementation.\\
 
 The literature rewiev provided good insight in the subject of lane detection systems and paved the way for starting the implementation phase of the project. However, one important issue was brought up  regarding the image acquisition on the Zynq-7000 board due to lack of camera drivers. A decision to use a separate node for the image processing part was made and is described more in detail in this section.
-\section{EMC2 board specification}
+\section{Altens mixed criticality platform specification}
 The mixed criticality platform that Alten uses can either be a Zedboard or an $EMC^2$-board. Both these boards hardware consists of a Xilinx Zynq-7000 which consists of an dual-core ARM-Cortex-A9 processor as well as an programmable logic part (FPGA). 
 \section{Raspberry pi}
 This section will describe the single board computer that is used for lane detection in this degree project. The chosen board is a Raspberry Pi 3 which is a credit card sized computer. The third generation of the raspberry has seen some major hardware updates compared to earlier versions. The one used in this project has the following specifications:
@@ -35,7 +35,7 @@ The Raspberry Pi camera module has been chosen as image acquisition device for t
 
 
 
-\includepdf[scale=0.8,pages=1,pagecommand=\section{System architecture}]{./img/architecture.pdf}
+\includepdf[scale=0.76,pages=1,pagecommand=\section{System architecture}]{./img/architecture.pdf}
 
 
 \section{System identification}
@@ -69,17 +69,15 @@ The angles in figure \ref{fig:PWM and angle correlation} are defined as in table
 \toprule
 Angle		& Direction \\ 
 \midrule
- \textless 90		& Left turn \\ 
+ \textless 90		& Right turn \\ 
   \: 90		& Straight forward \\ 
- \textgreater 90		& Right turn \\ 
+ \textgreater 90		& Left turn \\ 
 \bottomrule
  \end{tabular}
 \end{table}
 
 
-The line equation calculated is used in the steering control system to evaluate the steering angle compared to the identified line angles. This process is described later in this chapter.\\
-
-This is used in combination with the position control to eliminate the deviation from the centerline and thus improve performance of the system.
+The line equation calculated is used in the steering control system to evaluate the steering angle compared to the identified line angles. This process is described later in this chapter. This is used in combination with the position control to eliminate the deviation from the centerline and thus improve performance of the system.
 
 
 \section{Lane detection algorithm}
@@ -166,12 +164,12 @@ This $\alpha$ angle is compared to the known angle from the system identificatio
 $$error_{angle} = \alpha - (u*(-14.26)+195.96)$$
 
 
-The two errors are sent to the EMC2 board via serial communication where the lateral control is scheduled and executed on the mixed criticality platform.\\
+The two errors are sent to the Zynq-7000 via serial communication where the lateral control is scheduled and executed on the mixed criticality platform.\\
 
 A PID controller for the steering servo is developed using z transform. The output signal u to the steering servo is calculated as:
 $$u = \frac{PWM_{min}+PWM_{max}}{2} - a_{angle}*error_{angle} + a_{pos}*error_{pos}$$
 
-\section{Implementation and integration with zedboard}
+\section{Integration with Altens mixed criticality platform}
 \subsection{Tasks}
 As shown in figure \ref{fig:sequence diagram} there are currently threeXXX tasks scheduled that run on the real time operating system.
 
@@ -214,5 +212,8 @@ All the tasks are scheduled with fixed priority. The prority of the tasks are:
 \end{enumerate}
 
 
-\subsection{Timing requirements}
-WCET for the lateral control task is calculated as the end-to-end time which starts from the image acquisition in the Raspberry Pi, to the control signal that the emc2 sends. 
+%\subsection{Timing requirements}
+%Worst case execution time (WCET) for the lateral control task is determined from tests where it is tested if the system can behave as intended at the specific WCET.
+
+
+%is calculated as the end-to-end time which starts from the image acquisition in the Raspberry Pi, to the control signal that the Zynq-7000 board sends. 
