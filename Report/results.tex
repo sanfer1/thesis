@@ -23,6 +23,26 @@ Image Resolution   & & & 384x288 & 640x480  \\
 \end{table}
 
 
+Fler mätvärden och analysera det resultatet litegrann. Vad tar lång tid. Hur stor är skillnaden mellan största och minsta värde osv.\\
+
+
+
+\begin{figure}[H]
+  \begin{subfigure}[b]{\textwidth}
+    \includegraphics[width=1\linewidth]{./img/AVERAGE_timings_2.png}
+    \caption{\label{fig:Average timings}Average timings}
+  \end{subfigure}
+  \begin{subfigure}[b]{\textwidth}
+    \includegraphics[width=1\linewidth]{./img/WCET_timings.png}
+    \caption{\label{fig:WCET timings}WCET timings}
+  \end{subfigure}
+  \caption{\label{fig:Average and WCET timings of the different elements in the algorithm}Average and WCET timings of the different elements in the algorithm}
+\end{figure}
+
+Figure \ref{fig:Average and WCET timings of the different elements in the algorithm} shows how long time the different elements of the lane detection algorithm takes. In \ref{fig:Average and WCET timings of the different elements in the algorithm} it is clear that it is the image processing parts that consume the largest amount of time. Figure \ref{fig:WCET timings} shows the worst-case execution time for the same elements.\\
+
+
+
 
 \begin{figure}[H]
   \includegraphics[width=\textwidth]{./img/utor.JPG}
@@ -31,4 +51,5 @@ Image Resolution   & & & 384x288 & 640x480  \\
   \label{fig:The modified RC-car used for demonstrator}
 \end{figure}
 
-The figure \ref{fig:The modified RC-car used for demonstrator} above shows the demonstator vehicle with the mounted LIDAR and Raspberry Pi with camera. The main board behind the Raspberry is a Zedboard with the Xilinx Zynq-7000 chip.
+The figure \ref{fig:The modified RC-car used for demonstrator} above shows the demonstator vehicle with the mounted LIDAR and Raspberry Pi with camera. The main board behind the Raspberry is a Zedboard with the Xilinx Zynq-7000 chip.\\
+

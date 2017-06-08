@@ -171,7 +171,7 @@ $$u = \frac{PWM_{min}+PWM_{max}}{2} - a_{angle}*error_{angle} + a_{pos}*error_{p
 
 \section{Integration with Altens mixed criticality platform}
 \subsection{Tasks}
-As shown in figure \ref{fig:sequence diagram} there are currently threeXXX tasks scheduled that run on the real time operating system.
+As shown in figure \ref{fig:sequence diagram} there are currently four tasks scheduled that run on the real time operating system.
 
 \begin{figure}[H]
   \includegraphics[width=\textwidth]{./img/sekvensdiagram.png}
@@ -199,7 +199,6 @@ The data aggregation task is combining sensor data in order to detect anomalies,
 \subsubsection{Longitudinal control}
 This task controls the distance to the vehicle in front of the platoon. The distance is measured using the LIDAR.\\
  
-There will eventually be more tasks implemented including one task to switch to the non-critical operating system.
 
 \subsection{Priority}
 All the tasks are scheduled with fixed priority. The prority of the tasks are:
