@@ -4,7 +4,7 @@ This chapter will introduce the subject of road and lane detection, and mixed ci
 
 
 \section{Background}
-There is a global trend to make vehicles more autonomous to reduce human error and workload. Most modern vehicles include safety-critical systems where a failure can cause great damage to both humans and the environment. When the implementation is a safety-critical system it is important to be certain of the risks that are present and how to cope with them. One other increasingly important trend in the design of real-time and embedded systems is the integration of components with different criticality onto the same hardware platform \cite{burns2013mixed}.\\
+There is a global trend to make vehicles more autonomous to reduce human error and workload. Most modern vehicles include safety-critical systems where a failure can cause great damage to both humans and the environment. When the implementation is a safety-critical system it is important to be aware of the risks that are present and how to cope with them. One other increasingly important trend in the design of real-time and embedded systems is the integration of components with different criticality onto the same hardware platform \cite{burns2013mixed}.\\
 
 The $EMC^2$ project \cite{eu} is an initiative to drive the development of "Embedded Multi-Core systems for Mixed Criticality applications in dynamic and changeable real-time environments". One focus of the project is on automotive applications for example: "Advanced Driver Assistance Systems" (ADAS). ADAS are systems designed to help the driver and to increase the safety when driving. One example is the lane detection system to help keep the car within its lanes \cite{BarHillel2014}. What differs mixed criticality systems from regular systems is that two components with different criticality are run on the same hardware platform. One example could be to run the ADAS and the infotainment system of the vehicle on the same electric control unit (ECU).\\
 
@@ -53,6 +53,19 @@ The team goal is to develop a demonstrator which consists of two small RC-vehicl
 
 \subsection{Individual goal}
 The individual goal and expected outcome from this thesis is a study of existing road and lane detecting systems. Then comparing different systems to determine which is suitable for implementation in the safety critical system that the group is developing. The last part of the project is to implement the lane keeping algorithm on the RTOS of the mixed criticality system to demonstrate the functionality.
+
+\section{Use case}
+This thesis project is part of a larger project conducted by Alten which aims at developing a complete prototype of an intelligent transport system (ITS). In this ITS there will be two vehicles showing the concept of vehicle platooning. The vehicles will be fully autonomous and connected to the infratructure. The project is part of a large EU-project called Safecop which stands for Safe Cooperating Cyber-Physical Systems using Wireless Communication. By using wireless communication one can send commands to the vehicles in the platoon. For example if the conditions are satisfiened, e. g. good connection the ITS can send a command to the vehicle to engage in platoon mode. When they are in platoon mode and one vehicle detects slippery road surface, it can communicate it to the rest of the platoon and the distance between the vehicles can be increased to some predefined safety distance.\\
+
+The vehicles main computing board will contain components of different criticality which means that it is a mixed-criticality system. In a mixed criticality system it is important that the non-safety critical components can not in any way interfere with the safety critical components.\\
+
+
+This thesis project focuses on the perception problem and the lateral control of the vehicles. The goal is to develop a system that can keep the vehicles within the lane boundaries while keeping satisfactory speed forward. The investigation will be of experimental nature and an evaluation if this platform is appropriate for future use in similar applications will be carried out.
+
+
+%In the Safecop project description there is mentioned "The US National Highway Traffic Safety Administration (NHTSA) has estimated that “V2V safety applications have the potential to address approximately 80\% of crashes for unimpaired drivers”." The idea is to implement obstacle detection on the road and send out a warning to other vehicles in the platoon or close surrounding.
+
+
 
 \section{Delimitations}
 The thesis is produced at Alten. Constrained to the Xilinx Zynq-7000 \footnote{https://www.xilinx.com/products/silicon-devices/soc/zynq-7000.html}. The scope of this work extends to investigating lane detection and platoon driving for small vehicles operating in a constructed environment. The results will to some extent depend on the platform that the use case is built upon. In the case of objects on the track some collision avoidance system will be developed and will initially only consist of an emergency break of the vehicle.

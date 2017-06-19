@@ -61,7 +61,7 @@ When driving on freeways or large highways the road scene appearance diversity i
 \subsection{Modalities for environment perception}
 In this section the modalities used for road and lane detection will be described more in detail.\\
 
-Today there are several different sensing modalities used for lane detection. Some examples are monocular vision, stereo vision, LIDAR, IMU data, GPS.\\
+Today there are several different sensing modalities used for lane detection. Some examples are monocular vision, stereo vision, LIDAR, IMU data, GPS.
 
 \subsubsection{Monocular vision}
 Vision is the most prominent research area due to the fact that road signs/markings are made for human vision. Vision sensors provides good position estimation on the road without the need for any other modalities. However, there are situations when vision sensors simply cannot perform well, for example in extreme weather conditions or when driving off-road. In this kind of situations it is possible to use sensor fusion with other sensor modalities to provide a better position estimate, and it is the reason why LIDAR and GPS are important compliments to vision for reaching full autonomous driving.\\
@@ -71,9 +71,9 @@ The monocular vision system is frequently used for road and lane detection. It i
 When humans drive we continuously look at the road boundaries, the lane markings and the road texture among other things. These road boundaries are designed so that they should be visible for human drivers in all driving conditions. Self driving vehicles that are supposed to share the road with human drivers will therefore most likely have to rely on the same perceptual cues as humans.
 
 \subsubsection{LIDAR}
-Light detection and ranging (LIDAR) is a modality that have been used to a large extent in the development of autonomous vehicles for research purposes. The LIDAR measures the environment around the vehicle in 3D. The LIDAR sends out light pulse and measures the time for it to come back. As it is an active light source it is not dependent of having good natural lighting as with a regular camera.\\
+Light detection and ranging (LIDAR) is a modality that has been used to a large extent in the development of autonomous vehicles for research purposes. The LIDAR measures the environment around the vehicle in 3D. The LIDAR sends out light pulse and measures the time for it to come back. As it is an active light source it is not dependent of having good natural lighting as with a regular camera.\\
 
-LIDAR sensors can perform well in certain situations for example in rural areas to detect road boundaries, \cite{BarHillel2014} but are not well suited for multilane roads without vision data. As the LIDAR only measures 3D structures it not able to detect road markings, although some research have been done on intensity measurement with LIDAR \cite{huang2009finding} \cite{kammel2008lidar} which would make it possible to detect line markings to some extent. One huge drawback with this modality is that the sensors are still very expensive and thus not yet an alternative for implementation in regular passenger vehicles.
+LIDAR sensors can perform well in certain situations for example in rural areas to detect road boundaries, \cite{BarHillel2014} but are not well suited for multilane roads without vision data. As the LIDAR only measures 3D structures it is not able to detect road markings, although some research have been done on intensity measurement with LIDAR \cite{huang2009finding} \cite{kammel2008lidar} which would make it possible to detect line markings to some extent. One huge drawback with this modality is that the sensors are still very expensive and thus not yet an alternative for implementation in regular passenger vehicles.
 
 \subsubsection{Stereo imaging}
 Stereo imaging is the use of two cameras instead of one camera in order to obtain 3D information about the surrounding. It is a step in between monocular vision and LIDAR as it is much cheaper to implement than LIDAR but generally performs less good in terms of accuracy and reliability.  Also the stereo imaging system generally requires greater processing power and is more prone to errors compared to LIDAR. 
@@ -93,21 +93,21 @@ One problem with GPS is the reliability. GPS requires connection with enough sat
   \label{fig:Software architecture of the EMC2 platform}
 \end{figure}
 
-
-\subsection{Road model}
-The majority of lane detection systems initially propose a model of a road. This model can be both something simple as straight lines or more complex splines. Some researchers make the assumption that the road is two parallel lines in the image, this can be done after an operation called inverse perspective mapping, which produces an bird's-eye view  perspective \cite{bertozzi1998gold}. One other common method is to assume that the lanes have a common vanishing point where the both lanes meet and use that as a reference for the lines in the image \cite{Yenikaya:2013:KVR:2522968.2522970}\cite{jingyu2013lane}.
 \subsection{Image acquisition}
 The image acquisition typically comes from a camera that is mounted in the center of the vehicle.
+
 \subsection{Preprocess}
 The preprocess is a step where the image is prepared for the next steps in terms of image resolution, where a lower image resolution is often preferred due to the high computational load that high resolution images bring \cite{Yenikaya:2013:KVR:2522968.2522970}. Everything that is not part of the region of interest (ROI) is often removed. This typically means removing the region above the horizon. Often gray-scale images are preferred over color images due to reduced data load \cite{Yenikaya:2013:KVR:2522968.2522970}. Removal of unwanted disturbances such as shadows are often done in the preprocess. As mentioned in the section about road models, inverse perspective mapping is commonly done in the image preprocess to get rid of the perspective effect \cite{bertozzi1998gold}.
 
 \subsection{Feature extraction}
 There are several features that can be used for road and lane detection. The most typically used are color, texture and edges. For structured roads with clear line markings the edges are the most common feature used for lane detection. An edge is defined as the gradient of the intensity function \cite{Yenikaya:2013:KVR:2522968.2522970}. The output of an edge based method are candidates for lane boundaries, since edge based methods are able to find where the image brightness changes sharply. There are some well known edge detection methods (Prewitt, Roberts, Sobel), but one method called Canny edge detector stands out and is still, 30 years after it was first developed, considered a state-of-the-art edge detector, some even mean that it is an optimal edge detector algorithm \cite{bhadauria2013comparison}. A general process of operations that occur in the canny edge detector starts with applying a gaussian filter to smooth the image in order to remove noise. The next step is to scan the image for intensity gradients with a gradient operator and then apply a filter to supress noise but keep edges in the image. Then the image is analyzed for non-maxima points to further remove pixels that are not actual edges in the image. Next step is to treshold the image and lastly finalize the detection of edges by a hysteresis treshold which supresses all the weak edges that are not connected to other edges.\\
 
-Hough transform (HT) is then applied to the image in order to determine if there is an edge at one certain pixel or not. The Hough transform was originally invented 1962 and has since that been refined to the way it is universally used today. The HT works by converting the white pixels from the thresholded input image to points in the parameter coordinate space, meaning they will be represented using a direction theta and distance r instead of x an y.\\
+Hough transform (HT) is then applied to the image in order to determine if there is an edge at one certain pixel or not. The Hough transform was originally invented 1962 and has since then been refined to the way it is universally used today. The HT works by converting the white pixels from the thresholded input image to points in the parameter coordinate space, meaning they will be represented using a direction theta and distance r instead of x an y.\\
 
 Each point in the parameter space has a count, and each point in the image space has a vote. Edge pixels with the same theta and r value are assumed to define a line in the image. To compute the frequency of each line theta and r are put in a number of so called bins.  When all the edge pixels have been converted to parameter space these bins can be analyzed and the ones with the most amount of votes are the most prominent lines in the image. Usually a threshold is set where counts that does not exceed the threshold are ignored and only the most prominent lines are accepted \cite{davies}.
 
+\subsection{Road model}
+The majority of lane detection systems initially propose a model of a road. This model can be both something simple as straight lines or more complex splines. Some researchers make the assumption that the road is two parallel lines in the image, this can be done after an operation called inverse perspective mapping, which produces an bird's-eye view  perspective \cite{bertozzi1998gold}. One other common method is to assume that the lanes have a common vanishing point where the both lanes meet and use that as a reference for the lines in the image \cite{Yenikaya:2013:KVR:2522968.2522970}\cite{jingyu2013lane}.
 
 \subsection{Model fitting}
 As mentioned in the road model section, very often a road model is used and fitted to the observed information from the feature extraction section.\\
@@ -119,18 +119,6 @@ Other research propose the use of "RANdom SAmple Consensus", known as the RANSAC
 
 \subsection{Time integration}
 The last step that is important for a reliable lane detection system is to be able to incorporate some knowledge from previous frames. This is done in order to increase the reliability of the system and decrease the computational load.
-
-
-\section{Use case}
-This thesis project is part of a larger project conducted by Alten which aims at developing a complete prototype of an intelligent transport system (ITS). In this ITS there will be two vehicles showing the concept of vehicle platooning. The vehicles will be fully autonomous and connected to the infratructure. The project is part of a large EU-project called Safecop which stands for Safe Cooperating Cyber-Physical Systems using Wireless Communication. By using wireless communication one can send commands to the vehicles in the platoon. For example if the conditions are satisfiened, e. g. good connection the ITS can send a command to the vehicle to engage in platoon mode. When they are in platoon mode and one vehicle detects slippery road surface, it can communicate it to the rest of the platoon and the distance between the vehicles can be increased to some predefined safety distance.\\
-
-The vehicles main computing board will contain components of different criticality which means that it is a mixed-criticality system. In a mixed criticality system it is important that the non-safety critical components can not in any way interfere with the safety critical components.\\
-
-
-This thesis project focuses on the percetion problem and the lateral control of the vehicles. The goal is to develop a system that can keep the vehicles within the lane boundaries while keeping satisfactory speed forward. The investigation will be of experimental nature and an evaluation if this platform is appropriate for future use in similar applications will be carried out.
-
-
-%In the Safecop project description there is mentioned "The US National Highway Traffic Safety Administration (NHTSA) has estimated that “V2V safety applications have the potential to address approximately 80\% of crashes for unimpaired drivers”." The idea is to implement obstacle detection on the road and send out a warning to other vehicles in the platoon or close surrounding.
 
 
 \section{Platooning}
@@ -156,7 +144,7 @@ Each industry field (automotive, aerospace, railway, etc) has certain safety and
 \subsection{Scheduling}
 Every task that is implemented has a worst-case execution time (WCET). This is the maximum amount of time that the task can take to execute on the hardware platform. The WCET is used for guaranteeing that the temporal constraints will not be violated.\\
 
-A scheduler can be either preemptive or non-preemptive which means that if the scheduler is preemptive, it can interrupt a task during execution if a task with higher priority is ready for execution. A non-preemptive scheduler will wait for the task to complete \cite{RTSS}. Some of the most common scheduling algorithms are:
+A scheduler can be either preemptive or non-preemptive. If the scheduler is preemptive, it can interrupt a task during execution if a task with higher priority is ready for execution, a non-preemptive scheduler will wait for the task to complete \cite{RTSS}. Some of the most common scheduling algorithms are:
 
 \subsubsection{Fixed priority}
 Every task has a fixed priority assigned by the developer and the processor will execute the highest priority task of those that are ready to be executed. 
