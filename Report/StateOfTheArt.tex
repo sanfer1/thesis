@@ -41,13 +41,12 @@ According to Stolte \cite{stolte2016safety} it is needed to adopt measures that 
 \section{Lane keeping}
 In its basic setting the lane detection problem seems like a simple one. The only thing needed is to detect a host lane and only for a short distance ahead.
 
-For a human driving may seem like a simple process where two basic tasks are involved. The first is to keep the vehicle on the road and the second to avoid collisions. But in reality driving is not so trivial, a driver need to continuously analyze the road scene and choose and execute the appropriate maneuvers to deal with the current situation. To help the drivers do these tasks Driving Assistance Systems (DAS) have been developed. These systems can help the driver to perceive the blind area in the road for an example. An extension is the Advanced Driving Assistance System (ADAS) which can perform basic tasks like: Lane following, Lane keeping assistance, Lane departure warning, lateral control, intelligent cruise control, collision warning and ultimately autonomous driving.\\
+For a human driving may seem like a simple process where two basic tasks are involved. The first is to keep the vehicle on the road and the second to avoid collisions. But in reality driving is not so trivial, a driver need to continuously analyze the road scene and choose and execute the appropriate maneuvers to deal with the current situation. To help the drivers do these tasks Driver Assistance Systems (DAS) have been developed. These systems can help the driver to perceive the blind area in the road for an example. An extension is the Advanced Driver Assistance System (ADAS) which can perform basic tasks like: Lane following, Lane keeping assistance, Lane departure warning, lateral control, intelligent cruise control, collision warning and ultimately autonomous driving.\\
 
 The main bottleneck in the development of ADAS systems is the perception problem, which has two elements: road and lane perception, and obstacle detection. This degree project focuses on the first element and investigates the current state of the art research.\\
 
 A simple Hough transform-based algorithm solves the problem in 90\% of highway cases \cite{BarHillel2014}. 
-But the impression that the problem is easy is misleading and building a useful system requires a huge R\&{D} effort. One of the reasons is the high reliability demands. In order to be useful the system needs to reach very low error rates. The exact amount of false alarms is still a subject of research \cite{BarHillel2014}.
-At 15 frames per second, 1 false alarm per hour means only one error in 54,000 frames.\\
+But the impression that the problem is easy is misleading and building a useful system requires a huge R\&{D} effort. One of the reasons is the high reliability demands. In order to be useful the system needs to reach very low error rates. The exact amount of acceptable false alarms of a lane departure warning is still a subject of research \cite{BarHillel2014}. At 15 frames per second, 1 false alarm per hour means only one error in 54,000 frames.\\
 
 One factor that makes ADAS hard to implement on large scale is the large amount of different conditions that has to be taken care of. The main sources for condition diversity are:
 \begin{itemize}  
@@ -119,6 +118,8 @@ Other research propose the use of "RANdom SAmple Consensus", known as the RANSAC
 
 \subsection{Time integration}
 The last step that is important for a reliable lane detection system is to be able to incorporate some knowledge from previous frames. This is done in order to increase the reliability of the system and decrease the computational load.
+
+\subsection{Lateral control}
 
 
 \section{Platooning}

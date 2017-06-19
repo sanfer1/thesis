@@ -21,8 +21,14 @@
 {\Large Abstract}\\
 \textcolor{white}{.}\\
 \label{sec:abstract}
+\noindent
+One of the main challenges for advanced driver assistance systems (ADAS) is the environment perception problem. One factor that makes ADAS hard to implement is the large amount of different conditions that have to be taken care of. The main sources for condition diversity are lane and road appearance, image clarity issues and poor visibility conditions. A review of current lane detection algorithms has been carried out and based on that a lane detection algorithm has been developed and implemented on a mixed criticality platform. The thesis is part of a larger group project consisting of five master thesis students creating a demonstrator for autonomous platoon driving. The final lane detection algorithms consists of preprocessing steps where the image is converted to gray scale and everything except the region of interest (ROI) is cut away. OpenCV, a library for image processing has been utilized for edge detection and hough transform. An algorithm for error calculations is developed. The lane detection system is implemented on a Raspberry Pi which communicates with a mixed criticality platform through UART. The demonstrator vehicle can achieve a measured speed of 3.5 m/s with reliable lane keeping using the developed algorithm. It seems that the bottleneck is the lateral control of the vehicle rather than lane detection, further work should focus on control of the vehicle and possibly extending the ROI to detect curves in an earlier stage.\\
 
-This section will be the abstract of the report in English.
+
+
+\noindent
+%Keywords: Hough lines, Hough transform,  single board computer,  Mixed criticality systems,
+\textit{Keywords: Lane detection, Image processing, Advanced Driver Assistance Systems, Raspberry Pi 3, Platoon driving}
 
 \setcounter{page}{1}
 \vspace{0.25cm}

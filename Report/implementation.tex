@@ -85,11 +85,12 @@ This section will describe the algorithms used for lane detection that have been
 
 The algorithm that has been implemented on the demonstrator so far consist of the following steps:\\
 
-The lane detection process starts with grabbing a frame from the Raspberry Pi camera and applying a few preprocessing steps to the image.\\
+\begin{enumerate}  
+\item The lane detection process starts with grabbing a frame from the Raspberry Pi camera and applying a few preprocessing steps to the image.\\
+\item The first step is to crop the image to only contain the region of interest (ROI). This is a camera setting that can be predefined so that the camera only grabs the ROI and thus it is not needed to crop it after the frame is grabbed.\\
+\item The following step is to convert the image to gray scale to prepare it for next coming operations. Figure \ref{fig:Input image and grayscale} below shows how the acquired image looks in the first stages of the lane detection process.
+\end{enumerate}
 
-The first step is to crop the image to only contain the region of interest (ROI). This is a camera setting that can be predefined so that the camera only grabs the ROI and thus it is not needed to crop it after the frame is grabbed.\\
-
-The following step is to convert the image to gray scale to prepare it for next coming operations. Figure \ref{fig:Input image and grayscale} below shows how the acquired image looks in the first stages of the lane detection process.
 
 \begin{figure}[H]
   \begin{subfigure}[b]{0.50\textwidth}
@@ -201,12 +202,12 @@ This task controls the distance to the vehicle in front of the platoon. The dist
  
 
 \subsection{Priority}
-All the tasks are scheduled with fixed priority. The prority of the tasks are:
+All the tasks are scheduled with fixed priority. The prority of the tasks is listed below from high to low:
 
 \begin{enumerate}
+  \item Data aggregation
   \item Communication
   \item Lateral control
-  \item Data aggregation
   \item Longitudinal control
 \end{enumerate}
 

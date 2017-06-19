@@ -37,10 +37,7 @@
 \usepackage{cite}
 \definecolor{LightCyan}{rgb}{0.78,0.95,1}
 
-\pagestyle{fancy}
-\fancyhead[LE,RO]{\itshape \nouppercase \rightmark}
-\fancyhead[LO,RE]{\itshape \nouppercase Chapter \arabic{chapter}}
-\setlength\parindent{0pt}
+
 
 \title{\huge{Comparative study on road and lane detection in mixed criticality embedded systems} \\\large{~\\Evaluation of performance on Altens mixed criticality platform \\~\\ Master Thesis \\ Royal Institute of Technology \\ Stockholm, Sweden}}
 %\subtitle{subtitle}
@@ -62,6 +59,7 @@ Sanel Ferhatovic\\
 \include{sammanfattning}
 \include{preface}
 
+
 \begingroup
   \hypersetup{hidelinks}
   \tableofcontents
@@ -70,6 +68,13 @@ Sanel Ferhatovic\\
 \endgroup
 %\listoflistings
 \include{abbreviations}
+
+\pagestyle{fancy}
+\fancyhead[LE,RO]{\itshape \nouppercase \rightmark}
+\fancyhead[LO,RE]{\itshape \nouppercase Chapter \arabic{chapter}}
+\setlength\parindent{0pt}
+
+
 \pagenumbering{arabic}
 \include{introduction}
 \include{StateOfTheArt}
