@@ -21,8 +21,11 @@
 {\Large Sammanfattning}\\
 \textcolor{white}{.}\\
 \label{sec:sammanfattning}
+En stor utmaning för avancerade förarstödsystem (ADAS) är problemet med uppfattning av miljön runt omkring. En faktor som gör ADAS svårt att implementera är den stora mängd olika förhållanden som måste tas hand om. De största källorna till olikheter är utseendet på körfältet och vägen, dåliga siktförhållanden samt otydliga bilder. En granskning av nuvarande algoritmer för körfältsdetektering har utförts och baserat på den har en körfältsdetekteringsalgoritm utvecklats och implementerats på ett blandkritiskt system. Avhandlingen är en del av ett större grupprojekt bestående av fem mastersstudenter som ska skapa en demonstrator för autonom konvojkörning. Den slutgiltiga körfältsdetekteringsalgoritmen består av förbehandlingssteg, där bilden konverteras till gråskala och allt utom intresseområdet är bortklippt. OpenCV, ett bibliotek för bildbehandling har använts för kantdetektering och houghtransformation. En algoritm för felberäkningar har utvecklats. Körfältsdetekteringsalgoritmen har implementeras på en Raspberry Pi som kommunicerar med en blandkritisk plattform genom UART. Demo-fordonet kan uppnå en uppmätt hastighet på 3,5 m/s med pålitlig väghållning med den utvecklade algoritmen. Det verkar som att flaskhalsen är kontroll av fordonet i sidled och inte körfältsdetektering, ytterligare arbete bör fokusera på kontroll av fordonet och eventuellt utöka synfältet för att detektera kurvor i ett tidigare skede.\\
 
-Denna del kommer att inehålla en sammanfattning av arbetet på svenska.
+\noindent
+%Keywords: Hough lines, Hough transform,  single board computer,  Mixed criticality systems,
+\textit{Nyckelord: Körfältsdetektering, Bildbehandling, Avancerade förarstödsystem, Raspberry Pi 3, Konvojkörning}
 
 \setcounter{page}{1}
 \vspace{0.25cm}
