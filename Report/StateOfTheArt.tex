@@ -106,7 +106,19 @@ Hough transform (HT) is then applied to the image in order to determine if there
 Each point in the parameter space has a count, and each point in the image space has a vote. Edge pixels with the same theta and r value are assumed to define a line in the image. To compute the frequency of each line theta and r are put in a number of so called bins.  When all the edge pixels have been converted to parameter space these bins can be analyzed and the ones with the most amount of votes are the most prominent lines in the image. Usually a threshold is set where counts that does not exceed the threshold are ignored and only the most prominent lines are accepted \cite{davies}.
 
 \subsection{Road model}
-The majority of lane detection systems initially propose a model of a road. This model can be both something simple as straight lines or more complex splines. Some researchers make the assumption that the road is two parallel lines in the image, this can be done after an operation called inverse perspective mapping, which produces an bird's-eye view  perspective \cite{bertozzi1998gold}. One other common method is to assume that the lanes have a common vanishing point where the both lanes meet and use that as a reference for the lines in the image \cite{Yenikaya:2013:KVR:2522968.2522970}\cite{jingyu2013lane}.
+The majority of lane detection systems initially propose a model of a road. This model can be both something simple as straight lines or more complex splines. Some researchers make the assumption that the road is two parallel lines in the image, this can be done after an operation called inverse perspective mapping, which produces an bird's-eye view  perspective \cite{bertozzi1998gold}. One other common method is to assume that the lanes have a common vanishing point where the both lanes meet and use that as a reference for the lines in the image \cite{Yenikaya:2013:KVR:2522968.2522970}\cite{jingyu2013lane}. Both these two perspectives can be seen below in figure \ref{fig:Inverse perspective mapping and vanishing point perspective}
+
+\begin{figure}[H]
+  \begin{subfigure}[b]{0.50\textwidth}
+    \includegraphics[width=\textwidth]{./img/IPM.png}
+    \caption{\label{fig:Inverse perspective mapping}Inverse perspective mapping}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.50\textwidth}
+    \includegraphics[width=\textwidth]{./img/Vanishingpoint.png}
+    \caption{\label{fig:Vanishing point}Vanishing point}
+  \end{subfigure}
+  \caption{\label{fig:Inverse perspective mapping and vanishing point perspective}Road model in two different perspectives}
+\end{figure}
 
 \subsection{Model fitting}
 As mentioned in the road model section, very often a road model is used and fitted to the observed information from the feature extraction section.\\
@@ -120,7 +132,7 @@ Other research propose the use of "RANdom SAmple Consensus", known as the RANSAC
 The last step that is important for a reliable lane detection system is to be able to incorporate some knowledge from previous frames. This is done in order to increase the reliability of the system and decrease the computational load.
 
 \subsection{Lateral control}
-
+Here I will write about lateral control
 
 \section{Platooning}
 As the traffic intensity increases in the world, the problem with traffic congestion comes with it. In and around large cities today there are already huge problems due to heavy traffic. The situation leads to increasing emissions of greenhouse gases such as carbon dioxide. One way to ease the problem of traffic congestion and reduce the fuel consumption of vehicles is vehicle platooning. The concept of vehicle platooning is to reduce the distance between the vehicles on the road and thus reducing the wind resistance acting on each vehicle. Today most of the research cover the topic of heavy duty vehicles (HDV), where trucks are used to form a platoon on highways. Modern commercially available driver assistance systems such as adaptive cruise control use radar measurements to know relative distance and velocity to preceding vehicle and adjusts its own velocity automatically. This strategy works sufficiently good if the distance between the vehicles is long enough due to delays from measurements of the preceding vehicle to actuation of accelerating or braking torque at the wheels.\\

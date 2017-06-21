@@ -16,14 +16,11 @@ Table 4.1 shows the end-to-end time for the lane detection system currently impl
 \toprule
 Image Resolution   & & & 384x288 & 640x480  \\ 
 \midrule
- Mean time & & & 0.0422 & 0.0786 \\ 
- Mean fps & & & 23.714 & 12.724 \\
+ Mean time & & & 0.057 & 0.0786 \\ 
+ Mean fps & & & 17.54 & 12.724 \\
 \bottomrule
  \end{tabular}
 \end{table}
-
-
-Fler mätvärden och analysera det resultatet litegrann. Vad tar lång tid. Hur stor är skillnaden mellan största och minsta värde osv.\\
 
 
 
@@ -39,7 +36,7 @@ Fler mätvärden och analysera det resultatet litegrann. Vad tar lång tid. Hur 
   \caption{\label{fig:Average and WCET timings of the different elements in the algorithm}Average and WCET timings of the different elements in the algorithm}
 \end{figure}
 
-Figure \ref{fig:Average and WCET timings of the different elements in the algorithm} shows how long time the different elements of the lane detection algorithm takes. In \ref{fig:Average and WCET timings of the different elements in the algorithm} it is clear that it is the image processing parts that consume the largest amount of time. Figure \ref{fig:WCET timings} shows the worst-case execution time for the same elements.\\
+Figure \ref{fig:Average and WCET timings of the different elements in the algorithm} shows how long time the different elements of the lane detection algorithm takes. In the test the smaller resolution of 384x288 was used. In \ref{fig:Average timings} it is clear that it is the image processing parts that consume the largest amount of time. Figure \ref{fig:WCET timings} shows the worst-case execution time for the same elements.\\
 
 
 

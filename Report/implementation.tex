@@ -88,7 +88,15 @@ The line equation calculated is used in the steering control system to evaluate 
 \section{Lane detection algorithm}
 This section will describe the algorithms used for lane detection that have been implemented on the demonstrator of this project.\\
 
-The algorithm that has been implemented on the demonstrator so far consist of the following steps:\\
+The algorithm that has been implemented on the demonstrator so far consist of the following steps shown in \ref{fig:Developed system}\\
+
+\begin{figure}[H]
+  \includegraphics[width=\textwidth]{./img/developed_system.png}
+  \centering
+  \caption{Developed system}
+  \label{fig:Developed system}
+\end{figure}
+
 
 \begin{enumerate}  
 \item The lane detection process starts with grabbing a frame from the Raspberry Pi camera and applying a few preprocessing steps to the image.\\
@@ -119,7 +127,9 @@ The gray scale image is the input to the canny edge detection function. As descr
   \label{fig:Tresholded image using canny filter}
 \end{figure}
 
-This thresholded image is used as an input to the Hough transform function that is used for line detection.
+This thresholded image is used as an input to the Hough transform function that is used for line detection.\\
+
+The two figures below show the input image with lines drawn in different colors. The different colors of the lines indicate what kind of line it is. The red lines in the image are all the lines that the lane detection algorithm finds. From the red lines that are close to each other, blue lines indicate the center of the road marking. The green line show the center of the road lane. The concept behing the lane detection algorithm is described below figure \ref{fig:Detected lines}
 
 
 \begin{figure}[H]
